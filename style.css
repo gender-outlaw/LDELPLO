@@ -4,9 +4,8 @@
     "Lucida Sans", Arial, sans-serif;
 }
 
-
 #title h1 {
-padding: 10px;
+  padding: 10px;
 
   text-align: center;
   color: rgb(145, 214, 211);
@@ -39,8 +38,6 @@ canvas {
   border-radius: 10px;
 }
 
-
-
 #clue-list,
 #science-clues,
 #tech-clues,
@@ -56,7 +53,6 @@ canvas {
   padding: 10px;
   word-wrap: normal;
   font-size: 5;
-
 }
 
 #math-clues {
@@ -72,7 +68,6 @@ canvas {
   word-wrap: normal;
   font-size: 5;
 }
-
 
 /* #clue-container {
     display: flex;
@@ -95,7 +90,6 @@ canvas {
   text-align: centered;
 }
 #game {
-
   position: absolute;
   /* top: 30px; */
   /* left: 20px; */
@@ -108,7 +102,6 @@ canvas {
   top: 100px;
   left: 450px;
   text-align: centered;
-
 }
 #dialogue {
   color: white;
@@ -160,11 +153,10 @@ canvas {
   text-align: center;
 } */
 
-
-
-
 /* pridle */
 .pcontainer {
+  margin-left: 25%;
+  margin-top: auto;
   width: 800px;
   height: 640px;
   display: flex;
@@ -181,6 +173,8 @@ canvas {
   background-color: black;
 }
 .playerGuess {
+  margin-left: 25%;
+  margin-top: auto;
   width: 500px;
   height: 200px;
   display: flex;
@@ -190,7 +184,16 @@ canvas {
   background-repeat: no-repeat;
   font-size: 20px;
 }
-  /* memory game styling */
+
+.form {
+  margin-left: 25%;
+  margin-top: auto;
+}
+.pheader {
+  margin-left: 25%;
+  margin-top: auto;
+}
+/* memory game styling */
 .container {
     margin-left: 25%;
     margin-top: auto;
@@ -240,16 +243,13 @@ canvas {
     transform: rotateY(180deg);
   }
 
-  .blink_me {
-    animation: blinker 2s linear infinite;
-  }
-  
-  @keyframes blinker {
-    50% {
-      opacity: 0;
-    }
-  }
-  
-  
-  
 
+.blink_me {
+  animation: blinker 2s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
