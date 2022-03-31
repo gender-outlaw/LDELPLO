@@ -92,7 +92,7 @@ export default class Memory extends Phaser.Scene {
       memory.scene.stop('Memory');
       memory.scene.start('Lobby');
       memoryGame.classList.toggle('hidden');
-      canvas.classList.toggle('hidden');
+      canvas.classList.remove('hidden');
       sciClues.classList.toggle('hidden');
     }
   }
