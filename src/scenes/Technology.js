@@ -130,6 +130,7 @@ export default class Technology extends Phaser.Scene {
     let clue26 = document.getElementById("26");
     let clue27 = document.getElementById("27");
     let clue28 = document.getElementById("28");
+    let clue29 = document.getElementById("29");
 
     let count = document.getElementById("tClueCount");
     count.innerText = clueCount;
@@ -146,7 +147,15 @@ export default class Technology extends Phaser.Scene {
 
     if (clueCount === 4) {
       let dialogue = document.getElementById("dialogue");
-      dialogue.innerText = "You did it!";
+      dialogue.innerText =
+        "Great job! Why don't we head back to the main lobby?";
+      setTimeout(() => {
+        clue26.classList.toggle("hidden");
+        clue27.classList.toggle("hidden");
+        clue28.classList.toggle("hidden");
+        clue25.classList.toggle("hidden");
+        clue29.classList.remove("hidden");
+      }, 3000);
     }
 
     return false;
