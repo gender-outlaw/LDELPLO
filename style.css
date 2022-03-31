@@ -50,10 +50,10 @@ canvas {
   bottom: 100px;
   left: 10px;
   border: 2px solid black;
-  height: 275px;
+  height: 400px;
   width: 275px;
   background-color: #87486c;
-  border-radius: 30%;
+  border-radius: 10px;
   padding: 10px;
   word-wrap: normal;
   font-size: 5;
@@ -96,24 +96,15 @@ canvas {
   text-align: centered;
 }
 #game {
-
-  /* position: absolute; */
-  /* top: 30px; */
-  /* left: 20px; */
   border: 2px solid black;
-  /* height: 350px;
-  width: 450px; */
   background-color: #ecc9dd;
   border-radius: 30px;
   padding: 10px;
-  /* top: 100px;
-  left: 450px; */
   text-align: centered;
   margin-left: 25%;
   margin-top: auto;
   width: 800px;
   height: 650px;
-
 }
 #dialogue {
   color: white;
@@ -153,19 +144,6 @@ canvas {
     width: 100%;
   }
 }
-
-/* 
-#game {
-  position: absolute;
-  top: 250px;
-  left: 250px;
-  border: 2px solid black;
-  height: 200px;
-  width: 300px;
-  text-align: center;
-} */
-
-
 
 
 /* pridle */
