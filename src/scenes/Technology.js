@@ -4,8 +4,38 @@ import Pridle from "./Pridle";
 let tItem;
 let techDoor;
 let tText;
-let clueCount = 0;
-
+let tClueCount = 0;
+let nameGuessCount = 0;
+let techClues = document.getElementById("tech-clues");
+let guessButton = document.getElementById("subname");
+let nameguess = document.getElementById("nameguess");
+let techguess = document.getElementById("techguess");
+function submitName() {
+  console.log(nameguess.value);
+  const guess = nameguess.value.toUpperCase();
+  let techClues = document.getElementById("tech-clues");
+  if (guess === "LYNN CONWAY" || guess === "CONWAY") {
+    nameGuessCount = 0;
+    console.log("hello");
+    let win = document.getElementById("299");
+    let techClues = document.getElementById("tech-clues");
+    techClues.classList.add("hidden");
+    win.classList.toggle("hidden");
+    techguess.classList.add("hidden");
+  } else if (nameGuessCount === 3) {
+    console.log(nameGuessCount);
+    let lose = document.getElementById("29");
+    lose.classList.toggle("hidden");
+    techguess.classList.add("hidden");
+  } else {
+    nameGuessCount++;
+    nameguess.value = "TRY AGAIN";
+  }
+}
+function checkName() {
+  techguess.classList.remove("hidden");
+  guessButton.addEventListener("click", submitName);
+}
 export default class Technology extends Phaser.Scene {
   constructor() {
     super({ key: "Technology" });
@@ -43,8 +73,8 @@ export default class Technology extends Phaser.Scene {
     console.log("hi", this.cache.tilemap.get("techMap").data);
     //this.add.image(275, 275, "Floor");
 
-    let techClues = document.getElementById("tech-clues");
     techClues.classList.remove("hidden");
+    const nameGuess = document.getElementById("nameguess");
 
     const map = this.make.tilemap({
       key: "techMap",
@@ -112,18 +142,12 @@ export default class Technology extends Phaser.Scene {
     });
     this.physics.add.overlap(this.player, tItem, this.tCollect, null, this);
     this.physics.add.overlap(this.player, techDoor, this.exit, null, this);
-
-    tText = this.add.text(500, 70, `Clues List`, {
-      fontSize: "20px",
-      fill: "white",
-    });
-    tText.setScrollFactor(0);
   }
   update() {
     this.player.update(this.cursors);
   }
   tCollect(player, object) {
-    clueCount += 1;
+    tClueCount += 1;
     object.destroy(object.x, object.y);
     // text.setText(`Clues: y`); // set the text to show the current score
     let clue25 = document.getElementById("25");
@@ -132,7 +156,7 @@ export default class Technology extends Phaser.Scene {
     let clue28 = document.getElementById("28");
 
     let count = document.getElementById("tClueCount");
-    count.innerText = clueCount;
+    count.innerText = tClueCount;
 
     if (object.texture.key === "COMPUTER") {
       clue25.classList.remove("hidden");
@@ -144,16 +168,29 @@ export default class Technology extends Phaser.Scene {
       clue28.classList.remove("hidden");
     }
 
-    if (clueCount === 4) {
+    if (tClueCount === 4) {
       let dialogue = document.getElementById("dialogue");
-      dialogue.innerText = "You did it!";
+      dialogue.innerText =
+        "Great job! Why don't we head back to the main lobby?";
+      checkName();
     }
 
     return false;
   }
+
   exit() {
+    let techClues = document.getElementById("tech-clues");
     this.scene.stop("Technology");
-    this.scene.start("Pridle");
+    if (tClueCount === 4) {
+      this.scene.start("Pridle");
+    } else {
+      techClues.classList.add("hidden");
+      let win = document.getElementById("299");
+      win.classList.add("hidden");
+      let lose = document.getElementById("29");
+      lose.classList.add("hidden");
+      this.scene.start("Lobby");
+    }
   }
 
   createAnimations() {
