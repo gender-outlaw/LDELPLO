@@ -3,33 +3,37 @@ import Player from "../entities/Player";
 import Pridle from "./Pridle";
 let tItem;
 let techDoor;
-let tText;
 let tClueCount = 0;
-let nameGuessCount = 0;
+let nameGuessCount = 1;
 let techClues = document.getElementById("tech-clues");
 let guessButton = document.getElementById("subname");
 let nameguess = document.getElementById("nameguess");
 let techguess = document.getElementById("techguess");
+
 function submitName() {
   console.log(nameguess.value);
   const guess = nameguess.value.toUpperCase();
   let techClues = document.getElementById("tech-clues");
   if (guess === "LYNN CONWAY" || guess === "CONWAY") {
+    localStorage.setItem("tech", "complete");
     nameGuessCount = 0;
-    console.log("hello");
     let win = document.getElementById("299");
     let techClues = document.getElementById("tech-clues");
     techClues.classList.add("hidden");
     win.classList.toggle("hidden");
     techguess.classList.add("hidden");
+    let techScene = document.getElementById("techscene");
+    techScene.innerHTML = "<b>Technology Room</b>: Lynn Conway";
   } else if (nameGuessCount === 3) {
-    console.log(nameGuessCount);
+    localStorage.setItem("tech", "complete");
     let lose = document.getElementById("29");
     lose.classList.toggle("hidden");
     techguess.classList.add("hidden");
+    let techScene = document.getElementById("techscene");
+    techScene.innerHTML = "<b>Technology Room</b>: Lynn Conway";
   } else {
     nameGuessCount++;
-    nameguess.value = "TRY AGAIN";
+    nameguess.value = "";
   }
 }
 function checkName() {
@@ -70,10 +74,35 @@ export default class Technology extends Phaser.Scene {
     });
   }
   create() {
+    let localCount = localStorage.getItem("tcount");
+    if (localStorage.getItem("tech") === "complete") {
+      let techClues = document.getElementById("tech-clues");
+      techClues.classList.add("hidden");
+    } else if (localCount === "4") {
+      let techClues = document.getElementById("tech-clues");
+      techClues.classList.remove("hidden");
+      let clue25 = document.getElementById("25");
+      let clue26 = document.getElementById("26");
+      let clue27 = document.getElementById("27");
+      let clue28 = document.getElementById("28");
+      clue25.classList.remove("hidden");
+      clue26.classList.remove("hidden");
+      clue27.classList.remove("hidden");
+      clue28.classList.remove("hidden");
+      let count = document.getElementById("tClueCount");
+      count.innerText = localCount;
+      let dialogue = document.getElementById("dialogue");
+      dialogue.innerText =
+        "Great job! Why don't we head back to the main lobby?";
+      checkName();
+    } else {
+      let techClues = document.getElementById("tech-clues");
+      techClues.classList.remove("hidden");
+    }
+    let lobbyClues = document.getElementById("clue-list");
+    lobbyClues.classList.add("hidden");
     console.log("hi", this.cache.tilemap.get("techMap").data);
     //this.add.image(275, 275, "Floor");
-
-    techClues.classList.remove("hidden");
     const nameGuess = document.getElementById("nameguess");
 
     const map = this.make.tilemap({
@@ -147,7 +176,13 @@ export default class Technology extends Phaser.Scene {
     this.player.update(this.cursors);
   }
   tCollect(player, object) {
+    if (localStorage.getItem(object.texture.key)) {
+      // need to work on this
+      console.log("You already found that clue!");
+      return false;
+    }
     tClueCount += 1;
+    localStorage.setItem("tcount", tClueCount);
     object.destroy(object.x, object.y);
     // text.setText(`Clues: y`); // set the text to show the current score
     let clue25 = document.getElementById("25");
@@ -157,18 +192,23 @@ export default class Technology extends Phaser.Scene {
 
     let count = document.getElementById("tClueCount");
     count.innerText = tClueCount;
-
+    const objName = object.texture.key;
     if (object.texture.key === "COMPUTER") {
+      this.setItem(objName, "collected");
       clue25.classList.remove("hidden");
     } else if (object.texture.key === "CALIWAVES") {
+      this.setItem(objName, "collected");
       clue26.classList.remove("hidden");
     } else if (object.texture.key === "BOOK") {
+      this.setItem(objName, "collected");
       clue27.classList.remove("hidden");
     } else if (object.texture.key === "PRIDEFLAG") {
+      this.setItem(objName, "collected");
       clue28.classList.remove("hidden");
     }
-
+    let localCount = localStorage.getItem("tcount");
     if (tClueCount === 4) {
+      console.log(localCount === "4");
       let dialogue = document.getElementById("dialogue");
       dialogue.innerText =
         "Great job! Why don't we head back to the main lobby?";
@@ -177,7 +217,17 @@ export default class Technology extends Phaser.Scene {
 
     return false;
   }
+  setItem(item) {
+    localStorage.setItem(item, "collected");
+  }
 
+  getItem(item) {
+    if (localStorage.getItem(item)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   exit() {
     let techClues = document.getElementById("tech-clues");
     this.scene.stop("Technology");
@@ -186,9 +236,12 @@ export default class Technology extends Phaser.Scene {
     } else {
       techClues.classList.add("hidden");
       let win = document.getElementById("299");
+
       win.classList.add("hidden");
       let lose = document.getElementById("29");
       lose.classList.add("hidden");
+      let lobbyClues = document.getElementById("clue-list");
+      lobbyClues.classList.toggle("hidden");
       this.scene.start("Lobby");
     }
   }
