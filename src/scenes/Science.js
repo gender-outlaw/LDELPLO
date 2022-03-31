@@ -42,8 +42,10 @@ export default class Science extends Phaser.Scene {
   create() {
     console.log(this.cache.tilemap.get("sciMap").data);
 
-    if (!localStorage.getItem('science') === 'complete') {
-      scienceClues.classList.remove('hidden');
+    if (localStorage.getItem('science') === 'complete') {
+      scienceClues.classList.toggle("hidden");
+    } else {
+      scienceClues.classList.remove("hidden")
     }
 
     const map = this.make.tilemap({
