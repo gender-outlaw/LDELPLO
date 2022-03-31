@@ -123,23 +123,10 @@ export default class Scrammble extends Phaser.Scene {
     }
 
     function setLevel() {
-      if (level == 1) {
-        randomWord(1);
-      } else if (level == 2) {
-        randomWord(2);
-      } else if (level == 3) {
-        randomWord(3);
-      } else if (level == 4) {
-        randomWord(4);
-      } else if (level == 5) {
-        randomWord(5);
-      } else if (level == 6) {
-        randomWord(6);
-      } else if (level == 7) {
-        randomWord(7);
-      } else if (level == 8) {
-        randomWord(8);
-      } else if (level > 8) {
+      if (level <= 8) {
+        randomWord(level)
+      }
+       else if (level > 8) {
         info.innerHTML = "<span class='win'>You Win! Great job! </br></span>";
         exitScrammble()
       }
