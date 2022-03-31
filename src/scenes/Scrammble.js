@@ -61,11 +61,12 @@ export default class Scrammble extends Phaser.Scene {
 
     function exitScrammble () {
         scrammble.scene.stop("Scrammble");
-        let engBlock = document.getElementById("engineering-clues")
-        engBlock.classList.toggle("hidden")
-        canvas.classList.remove('hidden');
         scrammble.scene.start("Lobby", Lobby);
         game.classList.toggle("hidden");
+        canvas.classList.remove('hidden');
+        let engBlock = document.getElementById("engineering-clues")
+        engBlock.classList.toggle("hidden")
+        
 
     }
 
