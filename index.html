@@ -124,11 +124,13 @@
   
   </div>
   <div id="pridle" class="hidden">
+    <div class="pheader">
     <h2 style="color: rgb(105, 116, 216)">PRIDLE MINIGAME: WHICH PRIDE FLAG IS HIDDEN BELOW?</h2>
     <h3 style="color: rgb(74, 193, 70);">click the dropdown to choose a flag. hit submit to lock in your guess and remove one of six black tile.</h3>
     <h3 id="winner" class="hidden" style="color: rgb(223, 23, 146);">CONGRATS U GOT IT (now slam that sweet exit button to return to the Lobby)</h3>
     <h3 id="loser" class="hidden" style="color: rgb(240, 108, 0);">PROCESS OF ELIMINATION (now slam that sweet exit button to return to the Lobby)</h3>
     <button id="pridle-exit">Exit</button>
+  </div>
       <div id ="pridleimage"></div>
         <div class = "pcontainer" id ="pcontainer">
         <div class = "black" id ="square1">
@@ -147,7 +149,7 @@
           
         </div>
         </div>
-        <div>
+        <div class= "form">
             <label form="lang"></label>
             <select name="languages" id="lang">
               <option default="null">PICK A FLAG</option>
@@ -171,7 +173,7 @@
             </select>
             <input type="button" button id="bumsit" value="Submit" />
       </form>
-        
+        </div>
         <div class = "playerGuess" id ="guessContainer"></br>GUESSES</div>
       </div>
       </div>
