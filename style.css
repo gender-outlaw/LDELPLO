@@ -4,6 +4,7 @@
     "Lucida Sans", Arial, sans-serif;
 }
 
+
 button {
   top:50%;
   background-color:#383845;
@@ -27,6 +28,23 @@ button {
   * {
     display: none;
   }
+}
+
+#restart-hg {
+  cursor: pointer;
+  width: 200px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #ecc9dd;
+  font-weight: bold;
+}
+
+#main-menu {
+  color: white;
+  background-color: #87486c;
+  width: 300px;
+  padding: 5px;
+  border-radius: 10px;
 }
 
 body {
@@ -79,12 +97,6 @@ canvas {
   font-size: 5;
 }
 
-/* #clue-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-} */
-
 #rules {
   position: absolute;
   /* top: 30px; */
@@ -97,18 +109,19 @@ canvas {
   padding: 10px;
   top: 200px;
   left: 800px;
-  text-align: centered;
+  text-align: center;
 }
 #game {
   border: 2px solid black;
   background-color: #ecc9dd;
   border-radius: 30px;
   padding: 10px;
-  text-align: centered;
+  text-align: center;
   margin-left: 25%;
   margin-top: auto;
   width: 800px;
   height: 650px;
+
 }
 #dialogue {
   color: white;
@@ -121,19 +134,6 @@ canvas {
   background-color: black;
   text-align: center;
   padding: 10px;
-}
-
-#mad-libz {
-  position: absolute;
-  top: 150px;
-  left: 600px;
-  border: 2px solid black;
-  height: 275px;
-  width: 250px;
-  background-color: #87486c;
-  border-radius: 20px;
-  padding: 10px;
-  word-wrap: normal;
 }
 
 .hidden {
@@ -188,6 +188,7 @@ nav h1 {
   line-height: 15px;
   margin: 0 0 24px;
 
+
 }
 nav {
   text-align: center;
@@ -212,8 +213,11 @@ nav {
   margin: 0 0 24px;
 }
 
+
 /* pridle */
 .pcontainer {
+  margin-left: 25%;
+  margin-top: auto;
   width: 800px;
   height: 640px;
   display: flex;
@@ -230,6 +234,8 @@ nav {
   background-color: black;
 }
 .playerGuess {
+  margin-left: 25%;
+  margin-top: auto;
   width: 500px;
   height: 200px;
   display: flex;
@@ -239,54 +245,65 @@ nav {
   background-repeat: no-repeat;
   font-size: 20px;
 }
+
+.form {
+  margin-left: 25%;
+  margin-top: auto;
+}
+.pheader {
+  margin-left: 25%;
+  margin-top: auto;
+}
 /* memory game styling */
 .container {
-  width: 800px;
-  height: 650px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
-  padding: 5px;
-  perspective: 1000px;
-  background-color: lightpink;
-  border: 2px solid hotpink;
-}
+    margin-left: 25%;
+    margin-top: auto;
+    width: 800px;
+    height: 650px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    padding: 5px;
+    perspective: 1000px;
+    background-color: lightpink;
+    border: 2px solid hotpink;
+  }
+  
+  .card {
+    width: calc(25% - 10px);
+    height: calc(33.333% - 10px);
+    position: relative;
+    transform: scale(1);
+    transform-style: preserve-3d;
+    transition: transform .5s;
+    background-color: lightpink;
+    border: 2px solid hotpink;
+  }
+  
+  .card:active {
+    transform: scale(.97);
+    transition: transform 1s;
+  }
+  
+  .card.flip {
+    transform: rotateY(180deg);
+  }
+  
+  .front, .back {
+    width: 100%;
+    height: 100%;
+    /* padding: 10px; */
+    position: absolute;
+    border-radius: 5px;
+    backface-visibility: hidden;
+  }
+  
+  .front {
+    transform: rotateY(180deg);
+  }
 
-.card {
-  width: calc(25% - 10px);
-  height: calc(33.333% - 10px);
-  position: relative;
-  transform: scale(1);
-  transform-style: preserve-3d;
-  transition: transform 0.5s;
-  background-color: lightpink;
-  border: 2px solid hotpink;
-}
-
-.card:active {
-  transform: scale(0.97);
-  transition: transform 1s;
-}
-
-.card.flip {
-  transform: rotateY(180deg);
-}
-
-.front,
-.back {
-  width: 100%;
-  height: 100%;
-  /* padding: 10px; */
-  position: absolute;
-  border-radius: 5px;
-  backface-visibility: hidden;
-}
-
-.front {
-  transform: rotateY(180deg);
-}
 
 .blink_me {
   animation: blinker 2s linear infinite;
