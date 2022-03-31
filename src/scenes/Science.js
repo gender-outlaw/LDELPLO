@@ -131,6 +131,7 @@ export default class Science extends Phaser.Scene {
     }
 
     if (sciClueCount === 4) {
+      localStorage.setItem('science', 'complete');
       let dialogue = document.getElementById('dialogue');
       dialogue.innerText = 'You did it!';
       setTimeout(() => {

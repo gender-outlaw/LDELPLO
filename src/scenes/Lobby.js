@@ -5,6 +5,32 @@ import Engineering from "./Engineering";
 import Math from "./Math";
 import config from "../config/config";
 
+
+let clueList = document.getElementById('clue-list');
+
+let lobbyScene = document.getElementById("lobbyscene");
+let sciScene = document.getElementById("sciscene");
+let techScene = document.getElementById("techscene");
+let engScene = document.getElementById("engscene");
+let mathScene = document.getElementById("mathscene");
+
+let restartButton = document.getElementById("restart-hg");
+restartButton.addEventListener('click', () => {
+  localStorage.clear();
+  clueList.classList.remove("hidden")
+  lobbyScene.innerHTML = ''
+  sciScene.innerHTML = ''
+  techScene.innerHTML = ''
+  engScene.innerHTML = ''
+  mathScene.innerHTML = ''
+});
+
+lobbyScene.innerHTML = localStorage.getItem('lobby') ? '<b>Lobby</b>: Grace Hopper' : null;
+sciScene.innerHTML = localStorage.getItem('science') ? '<b>Science Room</b>: Rosalind Franklin' : null;
+techScene.innerHTML = localStorage.getItem('tech') ? '<b>Technology Room</b>: Lynn Conway' : null;
+engScene.innerHTML = localStorage.getItem('eng') ? '<b>Engineering Room</b>: Mary G Ross' : null;
+mathScene.innerHTML = localStorage.getItem('math') ? '<b>Math Room</b>: Katherine Johnson' : null;
+
 let Clues;
 let item;
 let object;
@@ -44,6 +70,9 @@ export default class Lobby extends Phaser.Scene {
   }
 
   create() {
+    if (localStorage.getItem('lobby') === 'complete') {
+      clueList.classList.add("hidden");
+    }
 
     console.log(this.cache.tilemap.get("map").data);
     const rules = document.getElementById("rules")
@@ -212,6 +241,7 @@ export default class Lobby extends Phaser.Scene {
     
     if (clueCount === 2) {
       localStorage.setItem('lobby', 'complete');
+      lobbyScene.innerHTML = '<b>Lobby</b>: Grace Hopper';
       let dialogue = document.getElementById("dialogue");
       dialogue.innerText = "Hmm ... those curtains look funny";
       setTimeout(() => {
