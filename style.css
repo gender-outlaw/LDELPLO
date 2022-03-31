@@ -20,6 +20,23 @@
   }
 }
 
+#restart-hg {
+  cursor: pointer;
+  width: 200px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #ecc9dd;
+  font-weight: bold;
+}
+
+#main-menu {
+  color: white;
+  background-color: #87486c;
+  width: 300px;
+  padding: 5px;
+  border-radius: 10px;
+}
+
 body {
   /* margin: auto;
   width: 25%; */
@@ -87,7 +104,7 @@ canvas {
   padding: 10px;
   top: 200px;
   left: 800px;
-  text-align: centered;
+  text-align: center;
 }
 #game {
   position: absolute;
