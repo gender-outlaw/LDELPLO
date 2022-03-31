@@ -45,6 +45,7 @@ canvas {
 #science-clues,
 #tech-clues,
 #engineering-clues {
+  color: #ecc9dd;
   position: absolute;
   bottom: 100px;
   left: 10px;
