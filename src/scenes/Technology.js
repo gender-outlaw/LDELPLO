@@ -5,7 +5,37 @@ let tItem;
 let techDoor;
 let tText;
 let tClueCount = 0;
-
+let nameGuessCount = 0;
+let techClues = document.getElementById("tech-clues");
+let guessButton = document.getElementById("subname");
+let nameguess = document.getElementById("nameguess");
+let techguess = document.getElementById("techguess");
+function submitName() {
+  console.log(nameguess.value);
+  const guess = nameguess.value.toUpperCase();
+  let techClues = document.getElementById("tech-clues");
+  if (guess === "LYNN CONWAY" || guess === "CONWAY") {
+    nameGuessCount = 0;
+    console.log("hello");
+    let win = document.getElementById("299");
+    let techClues = document.getElementById("tech-clues");
+    techClues.classList.add("hidden");
+    win.classList.toggle("hidden");
+    techguess.classList.add("hidden");
+  } else if (nameGuessCount === 3) {
+    console.log(nameGuessCount);
+    let lose = document.getElementById("29");
+    lose.classList.toggle("hidden");
+    techguess.classList.add("hidden");
+  } else {
+    nameGuessCount++;
+    nameguess.value = "TRY AGAIN";
+  }
+}
+function checkName() {
+  techguess.classList.remove("hidden");
+  guessButton.addEventListener("click", submitName);
+}
 export default class Technology extends Phaser.Scene {
   constructor() {
     super({ key: "Technology" });
@@ -43,8 +73,8 @@ export default class Technology extends Phaser.Scene {
     console.log("hi", this.cache.tilemap.get("techMap").data);
     //this.add.image(275, 275, "Floor");
 
-    let techClues = document.getElementById("tech-clues");
     techClues.classList.remove("hidden");
+    const nameGuess = document.getElementById("nameguess");
 
     const map = this.make.tilemap({
       key: "techMap",
@@ -124,7 +154,6 @@ export default class Technology extends Phaser.Scene {
     let clue26 = document.getElementById("26");
     let clue27 = document.getElementById("27");
     let clue28 = document.getElementById("28");
-    let clue29 = document.getElementById("29");
 
     let count = document.getElementById("tClueCount");
     count.innerText = tClueCount;
@@ -143,17 +172,12 @@ export default class Technology extends Phaser.Scene {
       let dialogue = document.getElementById("dialogue");
       dialogue.innerText =
         "Great job! Why don't we head back to the main lobby?";
-      setTimeout(() => {
-        clue26.classList.toggle("hidden");
-        clue27.classList.toggle("hidden");
-        clue28.classList.toggle("hidden");
-        clue25.classList.toggle("hidden");
-        clue29.classList.remove("hidden");
-      }, 5000);
+      checkName();
     }
 
     return false;
   }
+
   exit() {
     let techClues = document.getElementById("tech-clues");
     this.scene.stop("Technology");
@@ -161,6 +185,10 @@ export default class Technology extends Phaser.Scene {
       this.scene.start("Pridle");
     } else {
       techClues.classList.add("hidden");
+      let win = document.getElementById("299");
+      win.classList.add("hidden");
+      let lose = document.getElementById("29");
+      lose.classList.add("hidden");
       this.scene.start("Lobby");
     }
   }
