@@ -4,23 +4,21 @@
     "Lucida Sans", Arial, sans-serif;
 }
 
-
 button {
-  top:50%;
-  background-color:#383845;
+  top: 50%;
+  background-color: #383845;
   color: #fff;
-  border:none;
-  border-radius:10px;
-  box-shadow: 0px 0px 2px 2px rgb(0,0,0);
-  cursor: pointer; 
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0px 0px 2px 2px rgb(0, 0, 0);
+  cursor: pointer;
 }
 
 #title h1 {
   padding: 10px;
-
   text-align: center;
   color: rgb(145, 214, 211);
-  font-size: 2em;
+  font-size: 1em;
   letter-spacing: 0.25em;
   font-weight: 700;
 }
@@ -32,7 +30,6 @@ button {
 }
 
 #restart-hg {
-  
   border-radius: 10px;
   background-color: #ecc9dd;
   color: #87486c;
@@ -97,16 +94,16 @@ canvas {
 }
 #tech-clues {
   position: absolute;
-  bottom: 50px;
+  bottom: 5px;
   left: 10px;
   border: 2px solid black;
-  height: 500px;
+  height: 400px;
   width: 300px;
   background-color: #53c7e4;
   border-radius: 10px;
   padding: 10px;
   word-wrap: normal;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 #rules {
@@ -133,7 +130,6 @@ canvas {
   margin-top: auto;
   width: 800px;
   height: 650px;
-
 }
 #dialogue {
   color: white;
@@ -178,18 +174,17 @@ nav h1 {
   margin: 0 0 24px;
 }
 
-
-#scrammblerules button:hover, button {
-  top:50%;
-  background-color:#383845;
+#scrammblerules button:hover,
+button {
+  top: 50%;
+  background-color: #383845;
   color: #fff;
-  border:none;
-  border-radius:10px;
-  box-shadow: 0px 0px 2px 2px rgb(0,0,0);
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0px 0px 2px 2px rgb(0, 0, 0);
 }
 #back-to-lobby {
-  background-color:rgb(118, 58, 137);
-
+  background-color: rgb(118, 58, 137);
 }
 
 #game-container {
@@ -199,8 +194,6 @@ nav h1 {
   font-size: 18px;
   line-height: 15px;
   margin: 0 0 24px;
-
-
 }
 nav {
   text-align: center;
@@ -225,11 +218,11 @@ nav {
   margin: 0 0 24px;
 }
 
-
 /* pridle */
 .pcontainer {
-  margin-left: 25%;
-  margin-top: auto;
+  position: absolute;
+  top: 30%;
+  left: 25%;
   width: 800px;
   height: 640px;
   display: flex;
@@ -245,11 +238,16 @@ nav {
   box-sizing: border-box;
   background-color: black;
 }
+.pheader {
+  position: absolute;
+  top: 10%;
+}
 .playerGuess {
-  margin-left: 25%;
-  margin-top: auto;
-  width: 500px;
-  height: 200px;
+  position: absolute;
+  bottom: 20%;
+  left: 72%;
+  width: 300px;
+  height: 400px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -259,8 +257,9 @@ nav {
 }
 
 .form {
-  margin-left: 25%;
-  margin-top: auto;
+  position: absolute;
+  top: 30%;
+  left: 72%;
 }
 .pheader {
   margin-left: 25%;

@@ -10,6 +10,7 @@ let techClues = document.getElementById("tech-clues");
 let guessButton = document.getElementById("subname");
 let nameguess = document.getElementById("nameguess");
 let techguess = document.getElementById("techguess");
+
 function submitName() {
   console.log(nameguess.value);
   const guess = nameguess.value.toUpperCase();
@@ -70,10 +71,12 @@ export default class Technology extends Phaser.Scene {
     });
   }
   create() {
+    let lobbyClues = document.getElementById("clue-list");
+    lobbyClues.classList.add("hidden");
     console.log("hi", this.cache.tilemap.get("techMap").data);
     //this.add.image(275, 275, "Floor");
-
-    techClues.classList.remove("hidden");
+    let techClues = document.getElementById("tech-clues");
+    techClues.classList.toggle("hidden");
     const nameGuess = document.getElementById("nameguess");
 
     const map = this.make.tilemap({
@@ -189,6 +192,8 @@ export default class Technology extends Phaser.Scene {
       win.classList.add("hidden");
       let lose = document.getElementById("29");
       lose.classList.add("hidden");
+      let lobbyClues = document.getElementById("clue-list");
+      lobbyClues.classList.toggle("hidden");
       this.scene.start("Lobby");
     }
   }

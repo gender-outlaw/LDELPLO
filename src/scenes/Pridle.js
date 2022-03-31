@@ -60,6 +60,8 @@ export default class Pridle extends Phaser.Scene {
       let win = document.getElementById("299");
       win.classList.add("hidden");
       let lose = document.getElementById("29");
+      let lobbyClues = document.getElementById("clue-list");
+      lobbyClues.classList.remove("hidden");
       lose.classList.add("hidden");
       pridle.scene.stop("Pridle");
       pridle.scene.start("Lobby");
