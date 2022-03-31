@@ -37,21 +37,16 @@ export default class Scrammble extends Phaser.Scene {
     let attempts = 0;
     let correct = 0;
 
-    const lvlOneWords = ["code"];
-
-    const lvlTwoWords = ["java"];
-
-    const lvlThreeWords = ["react"];
-
-    const lvlFourWords = ["python"];
-
-    const lvlFiveWords = ["javascript"];
-
-    const lvlSixWords = ["debug"];
-
-    const lvlSevenWords = ["sequelize"];
-
-    const lvlEightWords = ["algorithms"];
+    const words = {
+      1: ["code"],
+      2: ["java"],
+      3: ["react"],
+      4: ["python"],
+      5: ["javascript"],
+      6: ["debug"],
+      7: ["sequelize"],
+      8: ["algorithms"]
+    }
 
     function reset() {
       level = 1;
@@ -74,39 +69,20 @@ export default class Scrammble extends Phaser.Scene {
 
     }
 
-    function randomWord(lvl) {
-      word = lvl[Math.floor(Math.random() * lvl.length + 1) - 1];
-      return word;
+    function randomWord(level) {
+      word = words[level][0]
+      return word
     }
 
     function scrambleWord(word) {
-      //[c, o, d, e]
       let letters = word.split("");
-
-      // 0
       let currentIndex = letters.length;
-
       let temporaryValue;
       let randomIndex;
-
-      // While there remain elements to shuffle...
-      // 0 !== 4
-
-      //letters = [o, e, c, d]
       while (0 !== currentIndex) {
-        // Pick a remaining element...
-
-        // 1
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -= 1;
-
-        // And swap it with the current element.
-
-        // temporaryValue = e //letters[0]
         temporaryValue = letters[currentIndex];
-
-        // letters[0] = letters[1]
-        // letters[1] = e
         letters[currentIndex] = letters[randomIndex];
         letters[randomIndex] = temporaryValue;
       }
@@ -121,11 +97,7 @@ export default class Scrammble extends Phaser.Scene {
 
     function checkAnswer(guess) {
       console.log(`Correct: ${correct}`);
-      // if (correct == 3) {
-      //   level += 1;
-      //   correct = 0;
-      // }
-
+  
       if (attempts == 3) {
         guessContainer.classList.toggle("hidden");
         info.innerHTML =
@@ -152,21 +124,21 @@ export default class Scrammble extends Phaser.Scene {
 
     function setLevel() {
       if (level == 1) {
-        randomWord(lvlOneWords);
+        randomWord(1);
       } else if (level == 2) {
-        randomWord(lvlTwoWords);
+        randomWord(2);
       } else if (level == 3) {
-        randomWord(lvlThreeWords);
+        randomWord(3);
       } else if (level == 4) {
-        randomWord(lvlFourWords);
+        randomWord(4);
       } else if (level == 5) {
-        randomWord(lvlFiveWords);
+        randomWord(5);
       } else if (level == 6) {
-        randomWord(lvlSixWords);
+        randomWord(6);
       } else if (level == 7) {
-        randomWord(lvlSevenWords);
+        randomWord(7);
       } else if (level == 8) {
-        randomWord(lvlEightWords);
+        randomWord(8);
       } else if (level > 8) {
         info.innerHTML = "<span class='win'>You Win! Great job! </br></span>";
         exitScrammble()
