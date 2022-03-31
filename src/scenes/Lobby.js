@@ -22,7 +22,8 @@ restartButton.addEventListener('click', () => {
   sciScene.innerHTML = ''
   techScene.innerHTML = ''
   engScene.innerHTML = ''
-  mathScene.innerHTML = ''
+  mathScene.innerHTML = '';
+  window.location.reload();
 });
 
 lobbyScene.innerHTML = localStorage.getItem('lobby') ? '<b>Lobby</b>: Grace Hopper' : null;
@@ -72,6 +73,8 @@ export default class Lobby extends Phaser.Scene {
   create() {
     if (localStorage.getItem('lobby') === 'complete') {
       clueList.classList.add("hidden");
+    } else {
+      clueList.classList.remove("hidden");
     }
 
     console.log(this.cache.tilemap.get("map").data);
