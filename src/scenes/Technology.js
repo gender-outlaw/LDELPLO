@@ -4,7 +4,7 @@ import Pridle from "./Pridle";
 let tItem;
 let techDoor;
 let tClueCount = 0;
-let nameGuessCount = 0;
+let nameGuessCount = 1;
 let techClues = document.getElementById("tech-clues");
 let guessButton = document.getElementById("subname");
 let nameguess = document.getElementById("nameguess");
@@ -33,7 +33,7 @@ function submitName() {
     techScene.innerHTML = "<b>Technology Room</b>: Lynn Conway";
   } else {
     nameGuessCount++;
-    nameguess.value = "TRY AGAIN";
+    nameguess.value = "";
   }
 }
 function checkName() {
@@ -74,9 +74,27 @@ export default class Technology extends Phaser.Scene {
     });
   }
   create() {
+    let localCount = localStorage.getItem("tcount");
     if (localStorage.getItem("tech") === "complete") {
       let techClues = document.getElementById("tech-clues");
       techClues.classList.add("hidden");
+    } else if (localCount === "4") {
+      let techClues = document.getElementById("tech-clues");
+      techClues.classList.remove("hidden");
+      let clue25 = document.getElementById("25");
+      let clue26 = document.getElementById("26");
+      let clue27 = document.getElementById("27");
+      let clue28 = document.getElementById("28");
+      clue25.classList.remove("hidden");
+      clue26.classList.remove("hidden");
+      clue27.classList.remove("hidden");
+      clue28.classList.remove("hidden");
+      let count = document.getElementById("tClueCount");
+      count.innerText = localCount;
+      let dialogue = document.getElementById("dialogue");
+      dialogue.innerText =
+        "Great job! Why don't we head back to the main lobby?";
+      checkName();
     } else {
       let techClues = document.getElementById("tech-clues");
       techClues.classList.remove("hidden");
@@ -164,6 +182,7 @@ export default class Technology extends Phaser.Scene {
       return false;
     }
     tClueCount += 1;
+    localStorage.setItem("tcount", tClueCount);
     object.destroy(object.x, object.y);
     // text.setText(`Clues: y`); // set the text to show the current score
     let clue25 = document.getElementById("25");
@@ -187,8 +206,9 @@ export default class Technology extends Phaser.Scene {
       this.setItem(objName, "collected");
       clue28.classList.remove("hidden");
     }
-
+    let localCount = localStorage.getItem("tcount");
     if (tClueCount === 4) {
+      console.log(localCount === "4");
       let dialogue = document.getElementById("dialogue");
       dialogue.innerText =
         "Great job! Why don't we head back to the main lobby?";
