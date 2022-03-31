@@ -4,6 +4,15 @@
     "Lucida Sans", Arial, sans-serif;
 }
 
+button {
+  top:50%;
+  background-color:#383845;
+  color: #fff;
+  border:none;
+  border-radius:10px;
+  box-shadow: 0px 0px 2px 2px rgb(0,0,0);
+}
+
 #title h1 {
   padding: 10px;
 
@@ -172,7 +181,6 @@ nav h1 {
 }
 
 #game-container {
-  top: 20px;
   text-align: center;
   color: #4c4a37;
   font-family: "Source Sans Pro", sans-serif;
