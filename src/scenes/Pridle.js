@@ -55,6 +55,8 @@ export default class Pridle extends Phaser.Scene {
     choiceButton.addEventListener("click", submit);
 
     function exitRoom() {
+      let techguess = document.getElementById("techguess");
+      techguess.classList.add("hidden");
       let techClues = document.getElementById("tech-clues");
       techClues.classList.add("hidden");
       let win = document.getElementById("299");
