@@ -87,10 +87,14 @@ export default class Pridle extends Phaser.Scene {
       document.getElementById("guessContainer").innerHTML += option.value;
       if (option.value === chosenFlag) {
         removeAllSquares();
+        document.getElementById("guessContainer").innerHTML = "";
+        document.getElementById("guessContainer").innerHTML = chosenFlag;
         const win = document.getElementById("winner");
         win.classList.remove("hidden");
       } else if (guessNum === 5) {
         removeSquare(squareNum);
+        document.getElementById("guessContainer").innerHTML = "";
+        document.getElementById("guessContainer").innerHTML = chosenFlag;
         const lose = document.getElementById("loser");
         lose.classList.remove("hidden");
       } else removeSquare(squareNum);
