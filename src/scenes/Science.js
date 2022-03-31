@@ -6,7 +6,9 @@ import Memory from '../scenes/Memory';
 let item;
 let sciDoor;
 let sText;
+let scienceClues = document.getElementById("science-clues");
 let sciClueCount = 0;
+let sciScene = document.getElementById("sciscene");
 
 export default class Science extends Phaser.Scene {
   constructor() {
@@ -40,8 +42,9 @@ export default class Science extends Phaser.Scene {
   create() {
     console.log(this.cache.tilemap.get("sciMap").data);
 
-    let scienceClues = document.getElementById('science-clues');
-    scienceClues.classList.remove('hidden');
+    if (!localStorage.getItem('science') === 'complete') {
+      scienceClues.classList.remove('hidden');
+    }
 
     const map = this.make.tilemap({
       key: "sciMap",
@@ -108,6 +111,11 @@ export default class Science extends Phaser.Scene {
   }
 
   collect(player, object) {
+    if (localStorage.getItem(object.texture.key)) { // need to work on this
+      console.log('You already found that clue!');
+      return false;
+    }
+
     sciClueCount += 1;
     object.destroy(object.x, object.y);
     // text.setText(`Clues: y`); // set the text to show the current score
@@ -119,14 +127,19 @@ export default class Science extends Phaser.Scene {
 
     let count = document.getElementById('sciClueCount');
     count.innerText = sciClueCount;
+    let objName = object.texture.key;
 
-    if (object.texture.key === 'chemical') {
+    if (objName === 'chemical') {
+      this.setItem(objName, 'collected')
       clue3.classList.remove('hidden');
-    } else if (object.texture.key === 'dna') {
+    } else if (objName === 'dna') {
+      this.setItem(objName, 'collected')
       clue4.classList.remove('hidden');
-    } else if (object.texture.key === 'research') {
+    } else if (objName === 'research') {
+      this.setItem(objName, 'collected')
       clue5.classList.remove('hidden');
-    } else if (object.texture.key === 'coal') {
+    } else if (objName === 'coal') {
+      this.setItem(objName, 'collected')
       clue6.classList.remove('hidden');
     }
 
@@ -140,9 +153,22 @@ export default class Science extends Phaser.Scene {
         clue5.classList.toggle("hidden")
         clue6.classList.toggle("hidden")
         clue101.classList.remove("hidden")
+        sciScene.innerHTML = '<b>Science Room</b>: Rosalind Franklin';
       }, 3000);
     }
     return false;
+  }
+
+  setItem(item) {
+    localStorage.setItem(item, "collected");
+  }
+
+  getItem(item){
+    if (localStorage.getItem(item)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   exit() {

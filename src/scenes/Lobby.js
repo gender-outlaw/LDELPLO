@@ -17,7 +17,7 @@ let mathScene = document.getElementById("mathscene");
 let restartButton = document.getElementById("restart-hg");
 restartButton.addEventListener('click', () => {
   localStorage.clear();
-  clueList.classList.remove("hidden")
+  clueList.classList.remove("hidden");
   lobbyScene.innerHTML = ''
   sciScene.innerHTML = ''
   techScene.innerHTML = ''
@@ -241,13 +241,13 @@ export default class Lobby extends Phaser.Scene {
     
     if (clueCount === 2) {
       localStorage.setItem('lobby', 'complete');
-      lobbyScene.innerHTML = '<b>Lobby</b>: Grace Hopper';
       let dialogue = document.getElementById("dialogue");
-      dialogue.innerText = "Hmm ... those curtains look funny";
       setTimeout(() => {
         clue1.classList.toggle("hidden")
         clue2.classList.toggle("hidden")
         clue99.classList.remove("hidden")
+        lobbyScene.innerHTML = '<b>Lobby</b>: Grace Hopper';
+        dialogue.innerText = "Check out those doors!";
       }, 3000);
     }
     return false;

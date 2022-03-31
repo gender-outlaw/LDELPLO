@@ -23,7 +23,11 @@ padding: 10px;
 
 #restart-hg {
   cursor: pointer;
-  width: 100px;
+  width: 200px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #ecc9dd;
+  font-weight: bold;
 }
 
 #main-menu {
