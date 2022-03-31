@@ -6,7 +6,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 //use dOM manipulation and element creation to layer things on top. you could use react if you wanted! but you dont need to
 
 module.exports = {
-  mode: "development",
+  mode: "production",
   devtool: "eval-source-map",
   module: {
     rules: [
