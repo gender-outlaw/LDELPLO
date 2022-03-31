@@ -192,6 +192,8 @@ canvas {
 }
   /* memory game styling */
 .container {
+    margin-left: 25%;
+    margin-top: auto;
     width: 800px;
     height: 650px;
     display: flex;

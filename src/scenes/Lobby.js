@@ -7,7 +7,6 @@ import config from "../config/config";
 
 let Clues;
 let item;
-let text;
 let object;
 let SDoor;
 let TDoor;
@@ -184,25 +183,35 @@ export default class Lobby extends Phaser.Scene {
   }
 
   collect(player, object) {
+    if (this.getItem(object.texture.key)) { // need to work on this
+      console.log('You already found that clue!');
+      return false;
+    }
     // this is what happens when we overlap with the object
     clueCount += 1;
     object.destroy(object.x, object.y);
-    // text.setText(`Clues: y`); // set the text to show the current score
     let clue1 = document.getElementById("1");
     let clue2 = document.getElementById("2");
     let clue99 = document.getElementById("99");
     let count = document.getElementById("clueCount");
     count.innerText = clueCount;
 
-    // console.log(object.texture.key); // object name
+    // console.log(object); // object name
+    let objName = object.texture.key;
 
-    if (object.texture.key === "Ship") {
+    if (objName === "Ship") {
+      this.setItem(objName, 'collected')
       clue1.classList.remove("hidden");
-    } else if (object.texture.key === "Moth") {
+    } else if (objName === "Moth") {
+      this.setItem(objName, 'collected');
       clue2.classList.remove("hidden");
     }
-
+    
+    localStorage.setItem('lobby', clueCount);
+    clueCount = Number(localStorage.getItem('lobby'));
+    
     if (clueCount === 2) {
+      localStorage.setItem('lobby', 'complete');
       let dialogue = document.getElementById("dialogue");
       dialogue.innerText = "Hmm ... those curtains look funny";
       setTimeout(() => {
@@ -211,10 +220,19 @@ export default class Lobby extends Phaser.Scene {
         clue99.classList.remove("hidden")
       }, 3000);
     }
-    // list = []
-    // list.push(object.listClues)
-    //`${list}
     return false;
+  }
+
+  setItem(item) {
+    localStorage.setItem(item, "collected");
+  }
+
+  getItem(item){
+    if (localStorage.getItem(item)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   createAnimations() {
