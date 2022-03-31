@@ -97,18 +97,22 @@ canvas {
 }
 #game {
 
-  position: absolute;
+  /* position: absolute; */
   /* top: 30px; */
   /* left: 20px; */
   border: 2px solid black;
-  height: 350px;
-  width: 450px;
+  /* height: 350px;
+  width: 450px; */
   background-color: #ecc9dd;
   border-radius: 30px;
   padding: 10px;
-  top: 100px;
-  left: 450px;
+  /* top: 100px;
+  left: 450px; */
   text-align: centered;
+  margin-left: 25%;
+  margin-top: auto;
+  width: 800px;
+  height: 650px;
 
 }
 #dialogue {

@@ -26,8 +26,9 @@ export default class Scrammble extends Phaser.Scene {
     const rules = document.getElementById("scrammblerules");
     const playBtn = document.getElementById("play-btn");
     const resetBtn = document.getElementById("reset-btn");
-    const backToLobby = document.getElementById("back-to-lobby")
-
+    const backToLobby = document.getElementById("back-to-lobby");
+    const canvas = document.querySelector('canvas');
+    canvas.classList.add('hidden');
     game.classList.remove("hidden");
 
     let level = 1;
@@ -67,6 +68,7 @@ export default class Scrammble extends Phaser.Scene {
         scrammble.scene.stop("Scrammble");
         let engBlock = document.getElementById("engineering-clues")
         engBlock.classList.toggle("hidden")
+        canvas.classList.remove('hidden');
         scrammble.scene.start("Lobby", Lobby);
         game.classList.toggle("hidden");
 
