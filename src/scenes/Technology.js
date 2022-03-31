@@ -4,7 +4,7 @@ import Pridle from "./Pridle";
 let tItem;
 let techDoor;
 let tText;
-let clueCount = 0;
+let tClueCount = 0;
 
 export default class Technology extends Phaser.Scene {
   constructor() {
@@ -112,18 +112,12 @@ export default class Technology extends Phaser.Scene {
     });
     this.physics.add.overlap(this.player, tItem, this.tCollect, null, this);
     this.physics.add.overlap(this.player, techDoor, this.exit, null, this);
-
-    tText = this.add.text(500, 70, `Clues List`, {
-      fontSize: "20px",
-      fill: "white",
-    });
-    tText.setScrollFactor(0);
   }
   update() {
     this.player.update(this.cursors);
   }
   tCollect(player, object) {
-    clueCount += 1;
+    tClueCount += 1;
     object.destroy(object.x, object.y);
     // text.setText(`Clues: y`); // set the text to show the current score
     let clue25 = document.getElementById("25");
@@ -133,7 +127,7 @@ export default class Technology extends Phaser.Scene {
     let clue29 = document.getElementById("29");
 
     let count = document.getElementById("tClueCount");
-    count.innerText = clueCount;
+    count.innerText = tClueCount;
 
     if (object.texture.key === "COMPUTER") {
       clue25.classList.remove("hidden");
@@ -145,7 +139,7 @@ export default class Technology extends Phaser.Scene {
       clue28.classList.remove("hidden");
     }
 
-    if (clueCount === 4) {
+    if (tClueCount === 4) {
       let dialogue = document.getElementById("dialogue");
       dialogue.innerText =
         "Great job! Why don't we head back to the main lobby?";
@@ -155,14 +149,20 @@ export default class Technology extends Phaser.Scene {
         clue28.classList.toggle("hidden");
         clue25.classList.toggle("hidden");
         clue29.classList.remove("hidden");
-      }, 3000);
+      }, 5000);
     }
 
     return false;
   }
   exit() {
+    let techClues = document.getElementById("tech-clues");
     this.scene.stop("Technology");
-    this.scene.start("Pridle");
+    if (tClueCount === 4) {
+      this.scene.start("Pridle");
+    } else {
+      techClues.classList.add("hidden");
+      this.scene.start("Lobby");
+    }
   }
 
   createAnimations() {

@@ -40,7 +40,6 @@ canvas {
 
 #clue-list,
 #science-clues,
-#tech-clues,
 #engineering-clues {
   position: absolute;
   bottom: 100px;
@@ -61,6 +60,19 @@ canvas {
   left: 10px;
   border: 2px solid black;
   height: 400px;
+  width: 275px;
+  background-color: #53c7e4;
+  border-radius: 10px;
+  padding: 10px;
+  word-wrap: normal;
+  font-size: 5;
+}
+#tech-clues {
+  position: absolute;
+  bottom: 100px;
+  left: 10px;
+  border: 2px solid black;
+  height: 800px;
   width: 275px;
   background-color: #53c7e4;
   border-radius: 10px;
@@ -195,54 +207,54 @@ canvas {
 }
 /* memory game styling */
 .container {
-    margin-left: 25%;
-    margin-top: auto;
-    width: 800px;
-    height: 650px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-    padding: 5px;
-    perspective: 1000px;
-    background-color: lightpink;
-    border: 2px solid hotpink;
-  }
-  
-  .card {
-    width: calc(25% - 10px);
-    height: calc(33.333% - 10px);
-    position: relative;
-    transform: scale(1);
-    transform-style: preserve-3d;
-    transition: transform .5s;
-    background-color: lightpink;
-    border: 2px solid hotpink;
-  }
-  
-  .card:active {
-    transform: scale(.97);
-    transition: transform 1s;
-  }
-  
-  .card.flip {
-    transform: rotateY(180deg);
-  }
-  
-  .front, .back {
-    width: 100%;
-    height: 100%;
-    /* padding: 10px; */
-    position: absolute;
-    border-radius: 5px;
-    backface-visibility: hidden;
-  }
-  
-  .front {
-    transform: rotateY(180deg);
-  }
+  margin-left: 25%;
+  margin-top: auto;
+  width: 800px;
+  height: 650px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  padding: 5px;
+  perspective: 1000px;
+  background-color: lightpink;
+  border: 2px solid hotpink;
+}
 
+.card {
+  width: calc(25% - 10px);
+  height: calc(33.333% - 10px);
+  position: relative;
+  transform: scale(1);
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+  background-color: lightpink;
+  border: 2px solid hotpink;
+}
+
+.card:active {
+  transform: scale(0.97);
+  transition: transform 1s;
+}
+
+.card.flip {
+  transform: rotateY(180deg);
+}
+
+.front,
+.back {
+  width: 100%;
+  height: 100%;
+  /* padding: 10px; */
+  position: absolute;
+  border-radius: 5px;
+  backface-visibility: hidden;
+}
+
+.front {
+  transform: rotateY(180deg);
+}
 
 .blink_me {
   animation: blinker 2s linear infinite;
