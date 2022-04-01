@@ -4,23 +4,21 @@
     "Lucida Sans", Arial, sans-serif;
 }
 
-
 button {
-  top:50%;
-  background-color:#383845;
+  top: 50%;
+  background-color: #383845;
   color: #fff;
-  border:none;
-  border-radius:10px;
-  box-shadow: 0px 0px 2px 2px rgb(0,0,0);
-  cursor: pointer; 
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0px 0px 2px 2px rgb(0, 0, 0);
+  cursor: pointer;
 }
 
 #title h1 {
   padding: 10px;
-
   text-align: center;
   color: rgb(145, 214, 211);
-  font-size: 2em;
+  font-size: 1em;
   letter-spacing: 0.25em;
   font-weight: 700;
 }
@@ -32,7 +30,6 @@ button {
 }
 
 #restart-hg {
-  
   border-radius: 10px;
   background-color: #070707;
   color: white;
@@ -42,6 +39,7 @@ button {
 #main-menu {
   color: #070707;
   background-color: rgb(145, 214, 211);
+  display: inline-block;
   width: 300px;
   padding: 5px;
   border-radius: 10px;
@@ -62,6 +60,7 @@ body {
 
 canvas {
   margin-left: 25%;
+  margin-top: 0%;
   border: 2px solid white;
   border-radius: 10px;
 }
@@ -107,7 +106,7 @@ canvas {
   border-radius: 10px;
   padding: 10px;
   word-wrap: normal;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 #rules {
@@ -134,7 +133,6 @@ canvas {
   margin-top: auto;
   width: 800px;
   height: 650px;
-
 }
 #dialogue {
   color: white;
@@ -179,18 +177,17 @@ nav h1 {
   margin: 0 0 24px;
 }
 
-
-#scrammblerules button:hover, button {
-  top:50%;
-  background-color:#383845;
+#scrammblerules button:hover,
+button {
+  top: 50%;
+  background-color: #383845;
   color: #fff;
-  border:none;
-  border-radius:10px;
-  box-shadow: 0px 0px 2px 2px rgb(0,0,0);
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0px 0px 2px 2px rgb(0, 0, 0);
 }
 #back-to-lobby {
-  background-color:rgb(118, 58, 137);
-
+  background-color: rgb(118, 58, 137);
 }
 
 #game-container {
@@ -200,8 +197,6 @@ nav h1 {
   font-size: 18px;
   line-height: 15px;
   margin: 0 0 24px;
-
-
 }
 nav {
   text-align: center;
@@ -226,19 +221,18 @@ nav {
   margin: 0 0 24px;
 }
 
-
 /* pridle */
 .pcontainer {
   margin-left: 25%;
   margin-top: auto;
   width: 800px;
-  height: 640px;
+  height: 650px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  background-image: url("./public/assets/images/pridleflags/Aromantic.svg");
   background-size: 800x, 640px;
   background-repeat: no-repeat;
+  border-radius: 10px;
 }
 .black {
   width: 33.33333%;
@@ -246,11 +240,17 @@ nav {
   box-sizing: border-box;
   background-color: black;
 }
+.pheader {
+  position: absolute;
+  left: 0%;
+  top: 10%;
+}
 .playerGuess {
-  margin-left: 25%;
-  margin-top: auto;
-  width: 500px;
-  height: 200px;
+  position: absolute;
+  left: 82%;
+  bottom: 10%;
+  width: 200px;
+  height: 400px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -260,11 +260,17 @@ nav {
 }
 
 .form {
-  margin-left: 25%;
-  margin-top: auto;
+  position: absolute;
+  left: 82%;
+  bottom: 5%;
 }
 .pheader {
   margin-left: 25%;
+  margin-top: auto;
+}
+.techguess {
+  display: inline-block;
+  margin-left: 0%;
   margin-top: auto;
 }
 /* memory game styling */
