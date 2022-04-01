@@ -82,7 +82,7 @@ export default class Lobby extends Phaser.Scene {
   create() {
     if (
       localStorage.getItem("lobby") === "complete" &&
-      localStorage.getItem("science") === "complete" &&
+      localStorage.getItem("sci") === "complete" &&
       localStorage.getItem("eng") === "complete" &&
       localStorage.getItem("math") === "complete" &&
       localStorage.getItem("tech") === "complete"
@@ -270,7 +270,8 @@ export default class Lobby extends Phaser.Scene {
         clue2.classList.toggle("hidden");
         clue99.classList.remove("hidden");
         lobbyScene.innerHTML = "<b>Lobby</b>: Grace Hopper";
-        dialogue.innerText = "Look behind those curtains at the top of the room. They each have letters...what do they mean?";
+        dialogue.innerText =
+          "Look behind those curtains at the top of the room. They each have letters...what do they mean?";
       }, 3000);
     }
     return false;

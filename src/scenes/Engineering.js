@@ -10,7 +10,43 @@ let backToLobbyDoor;
 let clueCount = 0;
 let engScene = document.getElementById("engscene");
 let engineeringClues = document.getElementById("engineering-clues");
+let nameGuessCount = 1;
+let firstnameGuess = document.getElementById("firstnameguess");
+let lastnameGuess = document.getElementById("lastnameguess");
+let nameguess = document.getElementById("nameguess");
+function submitName() {
+  const firstNameGuess = firstnameGuess.value.toUpperCase();
+  const lastNameGuess = lastnameGuess.value.toUpperCase();
+  if (
+    (firstNameGuess === "MARY" && lastNameGuess === "ROSS") ||
+    (firstNameGuess === "" && lastNameGuess === "ROSS")
+  ) {
+    localStorage.setItem("eng", "complete");
+    nameGuessCount = 0;
+    let nameguess = document.getElementById("nameguess");
+    nameguess.classList.add("hidden");
+    let engClues = document.getElementById("engineering-clues");
+    engClues.classList.add("hidden");
+    let engScene = document.getElementById("engscene");
+    sciScene.innerHTML = "<b>Engineering Room</b>: Mary Golda Ross";
+  } else if (nameGuessCount === 3) {
+    localStorage.setItem("eng", "complete");
 
+    let nameguess = document.getElementById("nameguess");
+    nameguess.classList.add("hidden");
+    let engScene = document.getElementById("engscene");
+    engScene.innerHTML = "<b>Engineering Room</b>: Mary Golda Ross";
+  } else {
+    nameGuessCount++;
+    firstnameGuess.value = "";
+    lastnameGuess.value = "";
+  }
+}
+
+function checkName() {
+  nameguess.classList.toggle("hidden");
+  guessButton.addEventListener("click", submitName);
+}
 export default class Engineering extends Phaser.Scene {
   constructor() {
     super("Engineering");
@@ -53,17 +89,15 @@ export default class Engineering extends Phaser.Scene {
   }
 
   create() {
-
-    if (localStorage.getItem('eng') === 'complete') {
+    if (localStorage.getItem("eng") === "complete") {
       engineeringClues.classList.toggle("hidden");
     } else {
-      engineeringClues.classList.remove("hidden")
+      engineeringClues.classList.remove("hidden");
     }
-
-
+    let lobbyClues = document.getElementById("clue-list");
+    lobbyClues.classList.add("hidden");
     this.add.image(0, 0, "engineeringFloor");
-    
-        
+
     // engineeringClues.classList.remove("hidden")
 
     const map = this.make.tilemap({
@@ -149,7 +183,6 @@ export default class Engineering extends Phaser.Scene {
     this.physics.add.collider(this.player, furnitureLayer);
     this.physics.add.collider(this.player, chalkboardLayer);
     this.physics.add.collider(this.player, plantsAndDecorLayer);
-
   }
 
   update() {
@@ -157,19 +190,28 @@ export default class Engineering extends Phaser.Scene {
   }
 
   exitRoom() {
-
+    let engClues = document.getElementById("engineering-clues");
     this.scene.stop("Engineering");
-    this.scene.start("Scrammble");
+    const num = localStorage.getItem("ecount");
+    if (num === "5") {
+      this.scene.start("Scrammble");
+    } else {
+      engClues.classList.add("hidden");
+      let lobbyClues = document.getElementById("clue-list");
+      lobbyClues.classList.toggle("hidden");
+      this.scene.start("Lobby");
+    }
     // engineeringClues.classList.toggle("hidden")
-    
   }
 
   eCollect(player, object) {
-    if (localStorage.getItem(object.texture.key)) { // need to work on this
-      console.log('You already found that clue!');
+    if (localStorage.getItem(object.texture.key)) {
+      // need to work on this
+      console.log("You already found that clue!");
       return false;
     }
     clueCount += 1;
+    localStorage.setItem("ecount", sciClueCount);
     object.destroy(object.x, object.y);
     let clue7 = document.getElementById("7");
     let clue8 = document.getElementById("8");
@@ -178,62 +220,56 @@ export default class Engineering extends Phaser.Scene {
     let clue11 = document.getElementById("11");
     let clue100 = document.getElementById("100");
 
-
     let count = document.getElementById("eClueCount");
     count.innerText = clueCount;
     let objName = object.texture.key;
 
-
     if (objName === "planet") {
-      this.setItem(objName, 'collected')
+      this.setItem(objName, "collected");
       clue11.classList.remove("hidden");
     } else if (objName === "coin") {
-      this.setItem(objName, 'collected')
+      this.setItem(objName, "collected");
       clue8.classList.remove("hidden");
     } else if (objName === "skunk") {
-      this.setItem(objName, 'collected')
+      this.setItem(objName, "collected");
       clue9.classList.remove("hidden");
     } else if (objName === "flag") {
-      this.setItem(objName, 'collected')
+      this.setItem(objName, "collected");
       clue7.classList.remove("hidden");
     } else if (objName === "lock") {
-      this.setItem(objName, 'collected')
+      this.setItem(objName, "collected");
       clue10.classList.remove("hidden");
     }
-
-    if (clueCount === 5){
-      localStorage.setItem('eng', 'complete');
+    let localCount = localStorage.getItem("ecount");
+    if (localCount === 5) {
+      localStorage.setItem("eng", "complete");
       let dialogue = document.getElementById("dialogue");
-      dialogue.innerText = "You did it!"
-      setTimeout(() => {
-        clue7.classList.toggle("hidden")
-        clue8.classList.toggle("hidden")
-        clue9.classList.toggle("hidden")
-        clue10.classList.toggle("hidden")
-        clue11.classList.toggle("hidden")
-        clue100.classList.remove("hidden")
-        engScene.innerHTML = '<b>Engineering Room</b>: Mary Golda Ross';
-      }, 3000);
-      
-      
-
+      dialogue.innerText = "You did it!";
+      // setTimeout(() => {
+      //   clue7.classList.toggle("hidden");
+      //   clue8.classList.toggle("hidden");
+      //   clue9.classList.toggle("hidden");
+      //   clue10.classList.toggle("hidden");
+      //   clue11.classList.toggle("hidden");
+      //   clue100.classList.remove("hidden");
+      //   engScene.innerHTML = "<b>Engineering Room</b>: Mary Golda Ross";
+      // }, 3000);
+      checkName();
+      return false;
     }
-
-    return false;
   }
 
   setItem(item) {
     localStorage.setItem(item, "collected");
   }
 
-  getItem(item){
+  getItem(item) {
     if (localStorage.getItem(item)) {
       return true;
     } else {
       return false;
     }
   }
-
 
   createAnimations() {
     this.player.anims.create({

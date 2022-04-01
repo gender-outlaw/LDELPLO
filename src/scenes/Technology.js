@@ -7,14 +7,19 @@ let tClueCount = 0;
 let nameGuessCount = 1;
 let techClues = document.getElementById("tech-clues");
 let guessButton = document.getElementById("subname");
-let nameguess = document.getElementById("nameguess");
-let techguess = document.getElementById("techguess");
+let firstnameGuess = document.getElementById("firstnameguess");
+let lastnameGuess = document.getElementById("lastnameguess");
+let techguess = document.getElementById("nameguess");
 
 function submitName() {
-  console.log(nameguess.value);
-  const guess = nameguess.value.toUpperCase();
+  const firstNameGuess = firstnameGuess.value.toUpperCase();
+  const lastNameGuess = lastnameGuess.value.toUpperCase();
   let techClues = document.getElementById("tech-clues");
-  if (guess === "LYNN CONWAY" || guess === "CONWAY") {
+  if (
+    (firstNameGuess === "LYNN" && lastNameGuess === "CONWAY") ||
+    (firstNameGuess === "" && lastNameGuess === "CONWAY")
+  ) {
+    techguess.classList.toggle("hidden");
     localStorage.setItem("tech", "complete");
     nameGuessCount = 0;
     let win = document.getElementById("299");
@@ -25,6 +30,7 @@ function submitName() {
     let techScene = document.getElementById("techscene");
     techScene.innerHTML = "<b>Technology Room</b>: Lynn Conway";
   } else if (nameGuessCount === 3) {
+    techguess.classList.toggle("hidden");
     localStorage.setItem("tech", "complete");
     let lose = document.getElementById("29");
     lose.classList.toggle("hidden");
@@ -33,11 +39,12 @@ function submitName() {
     techScene.innerHTML = "<b>Technology Room</b>: Lynn Conway";
   } else {
     nameGuessCount++;
-    nameguess.value = "";
+    firstNameGuess.value = "";
+    lastNameGuess.value = "";
   }
 }
 function checkName() {
-  techguess.classList.remove("hidden");
+  techguess.classList.toggle("hidden");
   guessButton.addEventListener("click", submitName);
 }
 export default class Technology extends Phaser.Scene {
@@ -207,15 +214,14 @@ export default class Technology extends Phaser.Scene {
       clue28.classList.remove("hidden");
     }
     let localCount = localStorage.getItem("tcount");
-    if (tClueCount === 4) {
-      console.log(localCount === "4");
+    if (localCount === 4) {
       let dialogue = document.getElementById("dialogue");
       dialogue.innerText =
         "Great job! Why don't we head back to the main lobby?";
       checkName();
-    }
 
-    return false;
+      return false;
+    }
   }
   setItem(item) {
     localStorage.setItem(item, "collected");
