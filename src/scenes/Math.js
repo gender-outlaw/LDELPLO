@@ -7,6 +7,8 @@ let item;
 let door;
 let rocket;
 let mathClueCount = 0;
+let mathClueList = document.getElementById("math-clues");
+let mathScene = document.getElementById("mathscene");
 
 export default class Math extends Phaser.Scene {
   constructor() {
@@ -46,8 +48,14 @@ export default class Math extends Phaser.Scene {
   create() {
     console.log(this.cache.tilemap.get("mathMap").data);
 
-    let mathCluesText = document.getElementById('math-clues');
-    mathCluesText.classList.remove('hidden');
+    if (localStorage.getItem('math') === 'complete') {
+      mathClueList.classList.toggle("hidden");
+    } else {
+      mathClueList.classList.remove("hidden");
+    }
+
+    // let mathCluesText = document.getElementById('math-clues');
+    // mathCluesText.classList.remove('hidden');
 
     const map = this.make.tilemap({
       key: "mathMap",
@@ -130,6 +138,11 @@ export default class Math extends Phaser.Scene {
   }
 
   mCollect(player, object) {
+      if (localStorage.getItem(object.texture.key)) { 
+        console.log('You already found that clue!');
+        return false;
+      }
+
       mathClueCount += 1;
       object.destroy(object.x, object.y);
       // text.setText(`Clues: y`); // set the text to show the current score
@@ -141,18 +154,24 @@ export default class Math extends Phaser.Scene {
 
       let count = document.getElementById('mathClueCount');
       count.innerText = mathClueCount;
+      let objName = object.texture.key;
 
-      if (object.texture.key === 'Pennant') {
+      if (objName === 'Pennant') {
+        this.setItem(objName, 'collected')
         clue30.classList.remove('hidden');
-      } else if (object.texture.key === 'Medal') {
+      } else if (objName === 'Medal') {
+        this.setItem(objName, 'collected')
         clue31.classList.remove('hidden');
-      } else if (object.texture.key === 'Calculator') {
+      } else if (objName === 'Calculator') {
+        this.setItem(objName, 'collected')
         clue32.classList.remove('hidden');
-      } else if (object.texture.key === 'Moon') {
+      } else if (objName === 'Moon') {
+        this.setItem(objName, 'collected')
         clue33.classList.remove('hidden');
       }
 
       if (mathClueCount === 4) {
+        localStorage.setItem('math', 'complete');
         let dialogue = document.getElementById('dialogue');
         dialogue.innerText = "Great job! Why don't we head back to the main lobby?";
         setTimeout(() => {
@@ -161,9 +180,22 @@ export default class Math extends Phaser.Scene {
           clue32.classList.toggle("hidden")
           clue33.classList.toggle("hidden")
           clue103.classList.remove("hidden")
+          mathScene.innerHTML = '<b>Math Room</b>: Katherine Johnson';
         }, 3000);
       }
       return false;
+    }
+
+    setItem(item) {
+      localStorage.setItem(item, "collected");
+    }
+  
+    getItem(item){
+      if (localStorage.getItem(item)) {
+        return true;
+      } else {
+        return false;
+      }
     }
   
 
@@ -173,6 +205,7 @@ export default class Math extends Phaser.Scene {
   }
 
   exit() {
+    mathClueList.classList.add("hidden");
     this.scene.stop("Math");
     this.scene.start("Lobby", Lobby);
   }
