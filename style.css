@@ -37,6 +37,7 @@ button {
 }
 
 #main-menu {
+  display: inline-block;
   color: white;
   background-color: #87486c;
   width: 300px;
@@ -58,6 +59,7 @@ body {
 
 canvas {
   margin-left: 25%;
+  margin-top: 0%;
   border: 2px solid white;
   border-radius: 10px;
 }
@@ -220,17 +222,16 @@ nav {
 
 /* pridle */
 .pcontainer {
-  position: absolute;
-  top: 30%;
-  left: 25%;
+  margin-left: 25%;
+  margin-top: auto;
   width: 800px;
-  height: 640px;
+  height: 650px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  background-image: url("./public/assets/images/pridleflags/Aromantic.svg");
   background-size: 800x, 640px;
   background-repeat: no-repeat;
+  border-radius: 10px;
 }
 .black {
   width: 33.33333%;
@@ -240,13 +241,14 @@ nav {
 }
 .pheader {
   position: absolute;
+  left: 0%;
   top: 10%;
 }
 .playerGuess {
   position: absolute;
-  bottom: 20%;
-  left: 72%;
-  width: 300px;
+  left: 82%;
+  bottom: 10%;
+  width: 200px;
   height: 400px;
   display: flex;
   flex-direction: row;
@@ -258,11 +260,15 @@ nav {
 
 .form {
   position: absolute;
-  top: 30%;
-  left: 72%;
+  left: 82%;
+  bottom: 5%;
 }
 .pheader {
   margin-left: 25%;
+  margin-top: auto;
+}
+.techguess {
+  margin-left: 0%;
   margin-top: auto;
 }
 /* memory game styling */

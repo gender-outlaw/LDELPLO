@@ -5,8 +5,7 @@ import Engineering from "./Engineering";
 import Math from "./Math";
 import config from "../config/config";
 
-
-let clueList = document.getElementById('clue-list');
+let clueList = document.getElementById("clue-list");
 
 let lobbyScene = document.getElementById("lobbyscene");
 let sciScene = document.getElementById("sciscene");
@@ -15,22 +14,32 @@ let engScene = document.getElementById("engscene");
 let mathScene = document.getElementById("mathscene");
 
 let restartButton = document.getElementById("restart-hg");
-restartButton.addEventListener('click', () => {
+restartButton.addEventListener("click", () => {
   localStorage.clear();
   clueList.classList.remove("hidden");
-  lobbyScene.innerHTML = ''
-  sciScene.innerHTML = ''
-  techScene.innerHTML = ''
-  engScene.innerHTML = ''
-  mathScene.innerHTML = '';
+  lobbyScene.innerHTML = "";
+  sciScene.innerHTML = "";
+  techScene.innerHTML = "";
+  engScene.innerHTML = "";
+  mathScene.innerHTML = "";
   window.location.reload();
 });
 
-lobbyScene.innerHTML = localStorage.getItem('lobby') ? '<b>Lobby</b>: Grace Hopper' : null;
-sciScene.innerHTML = localStorage.getItem('science') ? '<b>Science Room</b>: Rosalind Franklin' : null;
-techScene.innerHTML = localStorage.getItem('tech') ? '<b>Technology Room</b>: Lynn Conway' : null;
-engScene.innerHTML = localStorage.getItem('eng') ? '<b>Engineering Room</b>: Mary G Ross' : null;
-mathScene.innerHTML = localStorage.getItem('math') ? '<b>Math Room</b>: Katherine Johnson' : null;
+lobbyScene.innerHTML = localStorage.getItem("lobby")
+  ? "<b>Lobby</b>: Grace Hopper"
+  : null;
+sciScene.innerHTML = localStorage.getItem("science")
+  ? "<b>Science Room</b>: Rosalind Franklin"
+  : null;
+techScene.innerHTML = localStorage.getItem("tech")
+  ? "<b>Technology Room</b>: Lynn Conway"
+  : null;
+engScene.innerHTML = localStorage.getItem("eng")
+  ? "<b>Engineering Room</b>: Mary G Ross"
+  : null;
+mathScene.innerHTML = localStorage.getItem("math")
+  ? "<b>Math Room</b>: Katherine Johnson"
+  : null;
 
 let Clues;
 let item;
@@ -71,18 +80,28 @@ export default class Lobby extends Phaser.Scene {
   }
 
   create() {
-    if (localStorage.getItem('lobby') === 'complete') {
+    if (
+      localStorage.getItem("lobby") === "complete" &&
+      localStorage.getItem("science") === "complete" &&
+      localStorage.getItem("eng") === "complete" &&
+      localStorage.getItem("math") === "complete" &&
+      localStorage.getItem("tech") === "complete"
+    ) {
+      this.scene.stop("Lobby");
+      this.scene.start("EndCreds");
+    }
+    if (localStorage.getItem("lobby") === "complete") {
       clueList.classList.add("hidden");
     } else {
       clueList.classList.remove("hidden");
     }
 
     console.log(this.cache.tilemap.get("map").data);
-    const rules = document.getElementById("rules")
-    const playGameBtn = document.getElementById("play-maingame-btn")
+    const rules = document.getElementById("rules");
+    const playGameBtn = document.getElementById("play-maingame-btn");
 
     playGameBtn.addEventListener("click", function (e) {
-      rules.classList.add("hidden")
+      rules.classList.add("hidden");
     });
 
     // console.log(this.cache.tilemap.get("map").data);
@@ -215,8 +234,9 @@ export default class Lobby extends Phaser.Scene {
   }
 
   collect(player, object) {
-    if (this.getItem(object.texture.key)) { // need to work on this
-      console.log('You already found that clue!');
+    if (this.getItem(object.texture.key)) {
+      // need to work on this
+      console.log("You already found that clue!");
       return false;
     }
     // this is what happens when we overlap with the object
@@ -232,24 +252,24 @@ export default class Lobby extends Phaser.Scene {
     let objName = object.texture.key;
 
     if (objName === "Ship") {
-      this.setItem(objName, 'collected')
+      this.setItem(objName, "collected");
       clue1.classList.remove("hidden");
     } else if (objName === "Moth") {
-      this.setItem(objName, 'collected');
+      this.setItem(objName, "collected");
       clue2.classList.remove("hidden");
     }
-    
-    localStorage.setItem('lobby', clueCount);
-    clueCount = Number(localStorage.getItem('lobby'));
-    
+
+    localStorage.setItem("lobby", clueCount);
+    clueCount = Number(localStorage.getItem("lobby"));
+
     if (clueCount === 2) {
-      localStorage.setItem('lobby', 'complete');
+      localStorage.setItem("lobby", "complete");
       let dialogue = document.getElementById("dialogue");
       setTimeout(() => {
-        clue1.classList.toggle("hidden")
-        clue2.classList.toggle("hidden")
-        clue99.classList.remove("hidden")
-        lobbyScene.innerHTML = '<b>Lobby</b>: Grace Hopper';
+        clue1.classList.toggle("hidden");
+        clue2.classList.toggle("hidden");
+        clue99.classList.remove("hidden");
+        lobbyScene.innerHTML = "<b>Lobby</b>: Grace Hopper";
         dialogue.innerText = "Check out those doors!";
       }, 3000);
     }
@@ -260,7 +280,7 @@ export default class Lobby extends Phaser.Scene {
     localStorage.setItem(item, "collected");
   }
 
-  getItem(item){
+  getItem(item) {
     if (localStorage.getItem(item)) {
       return true;
     } else {
