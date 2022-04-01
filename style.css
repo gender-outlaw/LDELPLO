@@ -34,17 +34,18 @@ button {
 #restart-hg {
   
   border-radius: 10px;
-  background-color: #ecc9dd;
-  color: #87486c;
+  background-color: #070707;
+  color: white;
   font-weight: bold;
 }
 
 #main-menu {
-  color: white;
-  background-color: #87486c;
+  color: #070707;
+  background-color: rgb(145, 214, 211);
   width: 300px;
   padding: 5px;
   border-radius: 10px;
+  border: 2px solid black;
 }
 
 body {
@@ -68,14 +69,14 @@ canvas {
 #clue-list,
 #science-clues,
 #engineering-clues {
-  color: #ecc9dd;
+  color: black;
   position: absolute;
-  bottom: 100px;
+  bottom: 125px;
   left: 10px;
   border: 2px solid black;
   height: 400px;
   width: 275px;
-  background-color: #87486c;
+  background-color: rgb(145, 214, 211);;
   border-radius: 10px;
   padding: 10px;
   word-wrap: normal;
@@ -84,12 +85,12 @@ canvas {
 
 #math-clues {
   position: absolute;
-  bottom: 100px;
+  bottom: 125px;
   left: 10px;
   border: 2px solid black;
   height: 400px;
   width: 275px;
-  background-color: #53c7e4;
+  background-color: rgb(145, 214, 211);
   border-radius: 10px;
   padding: 10px;
   word-wrap: normal;
@@ -97,12 +98,12 @@ canvas {
 }
 #tech-clues {
   position: absolute;
-  bottom: 50px;
+  bottom: 125px;
   left: 10px;
   border: 2px solid black;
-  height: 500px;
+  height: 400px;
   width: 300px;
-  background-color: #53c7e4;
+  background-color: rgb(145, 214, 211);
   border-radius: 10px;
   padding: 10px;
   word-wrap: normal;
@@ -116,7 +117,7 @@ canvas {
   border: 2px solid black;
   height: 400px;
   width: 400px;
-  background-color: #ecc9dd;
+  background-color: rgb(145, 214, 211);
   border-radius: 30px;
   padding: 10px;
   top: 200px;
@@ -125,7 +126,7 @@ canvas {
 }
 #game {
   border: 2px solid black;
-  background-color: #ecc9dd;
+  background-color: rgb(145, 214, 211);
   border-radius: 30px;
   padding: 10px;
   text-align: center;
