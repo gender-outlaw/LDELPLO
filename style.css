@@ -49,6 +49,9 @@ button {
 body {
   /* margin: auto;
   width: 25%; */
+  display: flex;
+  flex-direction: colum;
+  flex-wrap: wrap;
   background-color: #423e41;
 }
 
@@ -58,9 +61,12 @@ body {
     justify-content: center;
 } */
 
+body,
 canvas {
-  margin-left: 25%;
-  margin-top: 0%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  /* margin-left: 25%;
+  margin-top: 0%; */
   border: 2px solid white;
   border-radius: 10px;
 }
@@ -68,14 +74,14 @@ canvas {
 #clue-list,
 #science-clues,
 #engineering-clues {
-  color: black;
-  position: absolute;
+  color: #000000;
+  /* position: absolute; */
   bottom: 125px;
   left: 10px;
   border: 2px solid black;
   height: 400px;
   width: 275px;
-  background-color: rgb(145, 214, 211);;
+  background-color: rgb(145, 214, 211);
   border-radius: 10px;
   padding: 10px;
   word-wrap: normal;
@@ -83,7 +89,7 @@ canvas {
 }
 
 #math-clues {
-  position: absolute;
+  /* position: absolute; */
   bottom: 125px;
   left: 10px;
   border: 2px solid black;
@@ -96,7 +102,7 @@ canvas {
   font-size: 5;
 }
 #tech-clues {
-  position: absolute;
+  /* position: absolute; */
   bottom: 125px;
   left: 10px;
   border: 2px solid black;
@@ -274,7 +280,6 @@ nav {
   margin-top: auto;
   color: white;
 }
-
 
 #techguess h3 {
   color: white;
