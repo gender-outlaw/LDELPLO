@@ -150,7 +150,7 @@ export default class Technology extends Phaser.Scene {
     bumpLayer.setCollisionByExclusion([-1]);
     this.physics.add.collider(this.player, bumpLayer); // move this to PLayer class
 
-    techClues = map.getObjectLayer("ClueObjects")["objects"];
+    let techClues = map.getObjectLayer("ClueObjects")["objects"];
     let door = map.getObjectLayer("DOOR")["objects"];
     tItem = this.physics.add.staticGroup();
     techDoor = this.physics.add.staticGroup();
@@ -231,7 +231,8 @@ export default class Technology extends Phaser.Scene {
   exit() {
     let techClues = document.getElementById("tech-clues");
     this.scene.stop("Technology");
-    if (tClueCount === 4) {
+    const num = localStorage.getItem("tcount");
+    if (num === "4") {
       this.scene.start("Pridle");
     } else {
       techClues.classList.add("hidden");

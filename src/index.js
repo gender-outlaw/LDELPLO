@@ -10,6 +10,7 @@ import SpaceInvaders from "./scenes/SpaceInvaders";
 import Scrammble from "./scenes/Scrammble";
 import Memory from "./scenes/Memory";
 import Pridle from "./scenes/Pridle";
+import EndCreds from "./scenes/EndCreds";
 
 class Game extends Phaser.Game {
   constructor() {
@@ -22,6 +23,7 @@ class Game extends Phaser.Game {
     this.scene.add("Science", Science);
     this.scene.add("Math", Math);
     this.scene.add("SpaceInvaders", SpaceInvaders);
+    this.scene.add("EndCreds", EndCreds);
     this.scene.add("Scrammble", Scrammble);
     this.scene.add("Memory", Memory);
     this.scene.add("Pridle", Pridle);
@@ -35,3 +37,4 @@ class Game extends Phaser.Game {
 }
 
 const game = new Game(config);
+console.log("scene", this.scene.key);
