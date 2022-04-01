@@ -5,7 +5,6 @@ import Memory from '../scenes/Memory';
 
 let item;
 let sciDoor;
-let sText;
 let scienceClues = document.getElementById("science-clues");
 let sciClueCount = 0;
 let sciScene = document.getElementById("sciscene");
@@ -100,12 +99,6 @@ export default class Science extends Phaser.Scene {
     this.physics.add.collider(this.player, furnitureLayer);
     this.physics.add.collider(this.player, wallLayer);
     this.physics.add.collider(this.player, objectLayer);
-
-    sText = this.add.text(500, 70, `Clues List`, {
-      fontSize: '20px',
-      fill: 'white',
-    });
-    sText.setScrollFactor(0);
   }
 
   update() {
@@ -148,7 +141,7 @@ export default class Science extends Phaser.Scene {
     if (sciClueCount === 4) {
       localStorage.setItem('science', 'complete');
       let dialogue = document.getElementById('dialogue');
-      dialogue.innerText = 'You did it!';
+      dialogue.innerText = "You did it! Why don't you go back to the main lobby?";
       setTimeout(() => {
         clue3.classList.toggle("hidden")
         clue4.classList.toggle("hidden")

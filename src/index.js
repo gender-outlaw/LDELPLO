@@ -37,4 +37,4 @@ class Game extends Phaser.Game {
 }
 
 const game = new Game(config);
-console.log("scene", this.scene.key);
+// console.log("scene", this.scene.key);
