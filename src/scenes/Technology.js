@@ -237,7 +237,6 @@ export default class Technology extends Phaser.Scene {
     } else {
       techClues.classList.add("hidden");
       let win = document.getElementById("299");
-
       win.classList.add("hidden");
       let lose = document.getElementById("29");
       lose.classList.add("hidden");
