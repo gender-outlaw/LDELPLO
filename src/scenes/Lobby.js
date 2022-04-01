@@ -270,7 +270,7 @@ export default class Lobby extends Phaser.Scene {
         clue2.classList.toggle("hidden");
         clue99.classList.remove("hidden");
         lobbyScene.innerHTML = "<b>Lobby</b>: Grace Hopper";
-        dialogue.innerText = "Check out those doors!";
+        dialogue.innerText = "Look behind those curtains at the top of the room. They each have letters...what do they mean?";
       }, 3000);
     }
     return false;

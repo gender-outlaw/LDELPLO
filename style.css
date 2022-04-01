@@ -268,10 +268,16 @@ nav {
   margin-left: 25%;
   margin-top: auto;
 }
-.techguess {
+#techguess {
   display: inline-block;
   margin-left: 0%;
   margin-top: auto;
+  color: white;
+}
+
+
+#techguess h3 {
+  color: white;
 }
 /* memory game styling */
 .container {
