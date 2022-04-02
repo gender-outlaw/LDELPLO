@@ -15,6 +15,7 @@ button {
 }
 
 #title h1 {
+  /* display: inline; */
   padding: 10px;
   text-align: center;
   color: rgb(145, 214, 211);
@@ -52,14 +53,16 @@ body {
   display: flex;
   flex-direction: colum;
   flex-wrap: wrap;
-  background-color: #423e41;
+  background-color: #000000;
 }
 
-/* #game-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-} */
+#game-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 5%;
+  padding-right: 10%;
+}
 
 body,
 canvas {
@@ -67,8 +70,15 @@ canvas {
   flex-wrap: wrap;
   /* margin-left: 25%;
   margin-top: 0%; */
-  border: 2px solid white;
-  border-radius: 10px;
+  /* border: 2px solid white;
+  border-radius: 10px; */
+}
+
+canvas {
+  flex-basis: 50%;
+  border: 2px solid rgb(255, 255, 255);
+  /* border-radius: 10px;
+  padding: 10px; */
 }
 
 #clue-list,
@@ -107,7 +117,7 @@ canvas {
   left: 10px;
   border: 2px solid black;
   height: 400px;
-  width: 300px;
+  width: 275px;
   background-color: rgb(145, 214, 211);
   border-radius: 10px;
   padding: 10px;
@@ -117,16 +127,14 @@ canvas {
 
 #rules {
   position: absolute;
-  /* top: 30px; */
-  /* left: 20px; */
   border: 2px solid black;
-  height: 400px;
-  width: 400px;
+  height: 640px;
+  width: 800px;
+  left: 23%;
+  top: 15%;
   background-color: rgb(145, 214, 211);
   border-radius: 30px;
   padding: 10px;
-  top: 200px;
-  left: 800px;
   text-align: center;
 }
 #game {
