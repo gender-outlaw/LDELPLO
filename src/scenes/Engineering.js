@@ -7,45 +7,50 @@ let eObject;
 let EngineeringClues;
 let Door;
 let backToLobbyDoor;
-let clueCount = 0;
-let engScene = document.getElementById("engscene");
+let eClueCount = 0;
 let engineeringClues = document.getElementById("engineering-clues");
 let nameGuessCount = 1;
-let firstnameGuess = document.getElementById("firstnameguess");
-let lastnameGuess = document.getElementById("lastnameguess");
-let nameguess = document.getElementById("nameguess");
-function submitName() {
-  const firstNameGuess = firstnameGuess.value.toUpperCase();
-  const lastNameGuess = lastnameGuess.value.toUpperCase();
+let guessButton = document.getElementById("subename");
+let firstnameEGuess = document.getElementById("firstenameguess");
+let lastnameEGuess = document.getElementById("lastenameguess");
+let nameguess = document.getElementById("nameEguess");
+function submitEName() {
+  const firstNameGuess = firstnameEGuess.value.toUpperCase();
+  const lastNameGuess = lastnameEGuess.value.toUpperCase();
   if (
     (firstNameGuess === "MARY" && lastNameGuess === "ROSS") ||
     (firstNameGuess === "" && lastNameGuess === "ROSS")
   ) {
     localStorage.setItem("eng", "complete");
-    nameGuessCount = 0;
-    let nameguess = document.getElementById("nameguess");
+    nameGuessCount = 1;
+    console.log("yoooo");
+    let nameguess = document.getElementById("nameEguess");
     nameguess.classList.add("hidden");
     let engClues = document.getElementById("engineering-clues");
     engClues.classList.add("hidden");
     let engScene = document.getElementById("engscene");
-    sciScene.innerHTML = "<b>Engineering Room</b>: Mary Golda Ross";
+    engScene.innerHTML = "<b>Engineering Room</b>: Mary Golda Ross";
+    let engBlock = document.getElementById("engineering-clues");
+    engBlock.classList.add("hidden");
   } else if (nameGuessCount === 3) {
-    localStorage.setItem("eng", "complete");
-
-    let nameguess = document.getElementById("nameguess");
+    localStorage.setItem("math", "complete");
+    let engBlock = document.getElementById("engineering-clues");
+    engBlock.classList.add("hidden");
+    let nameguess = document.getElementById("nameEguess");
     nameguess.classList.add("hidden");
     let engScene = document.getElementById("engscene");
     engScene.innerHTML = "<b>Engineering Room</b>: Mary Golda Ross";
   } else {
     nameGuessCount++;
-    firstnameGuess.value = "";
-    lastnameGuess.value = "";
   }
+  firstnameEGuess.value = "";
+  lastnameEGuess.value = "";
 }
 
-function checkName() {
+function checkEName() {
   nameguess.classList.toggle("hidden");
-  guessButton.addEventListener("click", submitName);
+  console.log("pleaseeee");
+  guessButton.addEventListener("click", submitEName);
 }
 export default class Engineering extends Phaser.Scene {
   constructor() {
@@ -210,8 +215,8 @@ export default class Engineering extends Phaser.Scene {
       console.log("You already found that clue!");
       return false;
     }
-    clueCount += 1;
-    localStorage.setItem("ecount", sciClueCount);
+    eClueCount += 1;
+    localStorage.setItem("ecount", eClueCount);
     object.destroy(object.x, object.y);
     let clue7 = document.getElementById("7");
     let clue8 = document.getElementById("8");
@@ -221,7 +226,7 @@ export default class Engineering extends Phaser.Scene {
     let clue100 = document.getElementById("100");
 
     let count = document.getElementById("eClueCount");
-    count.innerText = clueCount;
+    count.innerText = eClueCount;
     let objName = object.texture.key;
 
     if (objName === "planet") {
@@ -241,7 +246,7 @@ export default class Engineering extends Phaser.Scene {
       clue10.classList.remove("hidden");
     }
     let localCount = localStorage.getItem("ecount");
-    if (localCount === 5) {
+    if (localCount === "5") {
       localStorage.setItem("eng", "complete");
       let dialogue = document.getElementById("dialogue");
       dialogue.innerText = "You did it!";
@@ -254,7 +259,7 @@ export default class Engineering extends Phaser.Scene {
       //   clue100.classList.remove("hidden");
       //   engScene.innerHTML = "<b>Engineering Room</b>: Mary Golda Ross";
       // }, 3000);
-      checkName();
+      checkEName();
       return false;
     }
   }

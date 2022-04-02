@@ -7,8 +7,8 @@ export default class Scrammble extends Phaser.Scene {
   }
 
   preload() {
-    this.cameras.main.backgroundColor = Phaser.Display.Color.HexStringToColor("#000000");
-
+    this.cameras.main.backgroundColor =
+      Phaser.Display.Color.HexStringToColor("#000000");
   }
 
   create() {
@@ -27,8 +27,8 @@ export default class Scrammble extends Phaser.Scene {
     const playBtn = document.getElementById("play-btn");
     const resetBtn = document.getElementById("reset-btn");
     const backToLobby = document.getElementById("back-to-lobby");
-    const canvas = document.querySelector('canvas');
-    canvas.classList.add('hidden');
+    const canvas = document.querySelector("canvas");
+    canvas.classList.add("hidden");
     game.classList.remove("hidden");
 
     let level = 1;
@@ -45,8 +45,8 @@ export default class Scrammble extends Phaser.Scene {
       5: ["javascript"],
       6: ["debug"],
       7: ["sequelize"],
-      8: ["algorithms"]
-    }
+      8: ["algorithms"],
+    };
 
     function reset() {
       level = 1;
@@ -59,20 +59,18 @@ export default class Scrammble extends Phaser.Scene {
       userGuess.value = "";
     }
 
-    function exitScrammble () {
-        scrammble.scene.stop("Scrammble");
-        scrammble.scene.start("Lobby", Lobby);
-        game.classList.toggle("hidden");
-        canvas.classList.remove('hidden');
-        let engBlock = document.getElementById("engineering-clues")
-        engBlock.classList.toggle("hidden")
-        
-
+    function exitScrammble() {
+      scrammble.scene.stop("Scrammble");
+      scrammble.scene.start("Lobby", Lobby);
+      game.classList.toggle("hidden");
+      canvas.classList.remove("hidden");
+      let engBlock = document.getElementById("engineering-clues");
+      engBlock.classList.add("hidden");
     }
 
     function randomWord(level) {
-      word = words[level][0]
-      return word
+      word = words[level][0];
+      return word;
     }
 
     function scrambleWord(word) {
@@ -98,7 +96,7 @@ export default class Scrammble extends Phaser.Scene {
 
     function checkAnswer(guess) {
       console.log(`Correct: ${correct}`);
-  
+
       if (attempts == 3) {
         guessContainer.classList.toggle("hidden");
         info.innerHTML =
@@ -125,18 +123,15 @@ export default class Scrammble extends Phaser.Scene {
 
     function setLevel() {
       if (level <= 8) {
-        randomWord(level)
-      }
-       else if (level > 8) {
+        randomWord(level);
+      } else if (level > 8) {
         info.innerHTML = "<span class='win'>You Win! Great job! </br></span>";
-        exitScrammble()
+        exitScrammble();
       }
 
       console.log(`Word: ${word}`);
       usersWord.innerHTML = scrambleWord(word);
     }
-
-   
 
     playBtn.addEventListener("click", function (e) {
       rules.classList.toggle("hidden");
@@ -148,12 +143,10 @@ export default class Scrammble extends Phaser.Scene {
       userGuess.value = "";
     });
 
-      backToLobby.addEventListener("click", function (e) {
-        console.log('im in the backtolobbybbybydfjdfh')
-        exitScrammble()
+    backToLobby.addEventListener("click", function (e) {
+      console.log("im in the backtolobbybbybydfjdfh");
+      exitScrammble();
     });
-    
-    
 
     window.addEventListener(
       "keypress",

@@ -53,7 +53,49 @@ let mathDoor;
 let sciDoor;
 let clueCount = 0;
 let techDoor;
+let nameGuessCount = 1;
+let guessButton = document.getElementById("sublname");
+let firstnameLGuess = document.getElementById("firstnamelguess");
+let lastnameLGuess = document.getElementById("lastnamelguess");
+let nameguess = document.getElementById("nameLguess");
+function submitLName() {
+  const firstNameGuess = firstnameLGuess.value.toUpperCase();
+  const lastNameGuess = lastnameLGuess.value.toUpperCase();
+  if (
+    (firstNameGuess === "GRACE" && lastNameGuess === "HOPPER") ||
+    (firstNameGuess === "" && lastNameGuess === "HOPPER")
+  ) {
+    localStorage.setItem("lobby", "complete");
+    nameGuessCount = 1;
+    console.log("yoooo");
+    let nameguess = document.getElementById("nameLguess");
+    nameguess.classList.add("hidden");
+    let lobbyClues = document.getElementById("clue-list");
+    lobbyClues.classList.add("hidden");
+    let lobbyScene = document.getElementById("lobbyscene");
+    lobbyScene.innerHTML = "<b>Lobby</b>: Grace Hopper";
+    let lobbyBlock = document.getElementById("clue-list");
+    lobbyBlock.classList.add("hidden");
+  } else if (nameGuessCount === 3) {
+    localStorage.setItem("lobby", "complete");
+    let lobbyBlock = document.getElementById("clue-list");
+    lobbyBlock.classList.add("hidden");
+    let nameguess = document.getElementById("nameLguess");
+    nameguess.classList.add("hidden");
+    let lobbyScene = document.getElementById("lobbyscene");
+    sciScene.innerHTML = "<b>Lobby</b>: Grace Hopper";
+  } else {
+    nameGuessCount++;
+  }
+  firstnameLGuess.value = "";
+  lastnameLGuess.value = "";
+}
 
+function checkLName() {
+  nameguess.classList.toggle("hidden");
+  console.log("pleaseeee");
+  guessButton.addEventListener("click", submitLName);
+}
 export default class Lobby extends Phaser.Scene {
   constructor() {
     super({ key: "Lobby" });
@@ -241,6 +283,7 @@ export default class Lobby extends Phaser.Scene {
     }
     // this is what happens when we overlap with the object
     clueCount += 1;
+    localStorage.setItem("lcount", clueCount);
     object.destroy(object.x, object.y);
     let clue1 = document.getElementById("1");
     let clue2 = document.getElementById("2");
@@ -259,22 +302,17 @@ export default class Lobby extends Phaser.Scene {
       clue2.classList.remove("hidden");
     }
 
-    localStorage.setItem("lobby", clueCount);
-    clueCount = Number(localStorage.getItem("lobby"));
+    let lobbyCount = localStorage.getItem("lcount");
 
-    if (clueCount === 2) {
-      localStorage.setItem("lobby", "complete");
+    if (lobbyCount === "2") {
       let dialogue = document.getElementById("dialogue");
       setTimeout(() => {
-        clue1.classList.toggle("hidden");
-        clue2.classList.toggle("hidden");
-        clue99.classList.remove("hidden");
-        lobbyScene.innerHTML = "<b>Lobby</b>: Grace Hopper";
         dialogue.innerText =
           "Look behind those curtains at the top of the room. They each have letters...what do they mean?";
       }, 3000);
+      checkLName();
+      return false;
     }
-    return false;
   }
 
   setItem(item) {

@@ -7,42 +7,47 @@ let sciDoor;
 let scienceClues = document.getElementById("science-clues");
 let sciClueCount = 0;
 let nameGuessCount = 1;
-let firstnameGuess = document.getElementById("firstnameguess");
-let lastnameGuess = document.getElementById("lastnameguess");
-let nameguess = document.getElementById("nameguess");
-function submitName() {
-  console.log("yo");
-  const firstNameGuess = firstnameGuess.value.toUpperCase();
-  const lastNameGuess = lastnameGuess.value.toUpperCase();
+let guessButton = document.getElementById("subsname");
+let firstnameSGuess = document.getElementById("firstnamesguess");
+let lastnameSGuess = document.getElementById("lastnamesguess");
+let nameguess = document.getElementById("nameSguess");
+function submitSName() {
+  const firstNameGuess = firstnameSGuess.value.toUpperCase();
+  const lastNameGuess = lastnameSGuess.value.toUpperCase();
   if (
     (firstNameGuess === "ROSALIND" && lastNameGuess === "FRANKLIN") ||
     (firstNameGuess === "" && lastNameGuess === "FRANKLIN")
   ) {
     localStorage.setItem("sci", "complete");
-    nameGuessCount = 0;
-    let nameguess = document.getElementById("nameguess");
+    nameGuessCount = 1;
+    console.log("yoooo");
+    let nameguess = document.getElementById("nameSguess");
     nameguess.classList.add("hidden");
     let sciClues = document.getElementById("science-clues");
     sciClues.classList.add("hidden");
     let sciScene = document.getElementById("sciscene");
     sciScene.innerHTML = "<b>Science Room</b>: Rosalind Franklin";
+    let sciBlock = document.getElementById("science-clues");
+    sciBlock.classList.add("hidden");
   } else if (nameGuessCount === 3) {
     localStorage.setItem("sci", "complete");
-
-    let nameguess = document.getElementById("nameguess");
+    let sciBlock = document.getElementById("science-clues");
+    sciBlock.classList.add("hidden");
+    let nameguess = document.getElementById("nameSguess");
     nameguess.classList.add("hidden");
     let sciScene = document.getElementById("sciscene");
     sciScene.innerHTML = "<b>Science Room</b>: Rosalind Franklin";
   } else {
     nameGuessCount++;
-    firstnameGuess.value = "";
-    lastnameGuess.value = "";
   }
+  firstnameSGuess.value = "";
+  lastnameSGuess.value = "";
 }
 
-function checkName() {
+function checkSName() {
   nameguess.classList.toggle("hidden");
-  guessButton.addEventListener("click", submitName);
+  console.log("pleaseeee");
+  guessButton.addEventListener("click", submitSName);
 }
 export default class Science extends Phaser.Scene {
   constructor() {
@@ -176,7 +181,7 @@ export default class Science extends Phaser.Scene {
       clue6.classList.remove("hidden");
     }
     let localCount = localStorage.getItem("scount");
-    if (localCount === 4) {
+    if (localCount === "4") {
       let dialogue = document.getElementById("dialogue");
       dialogue.innerText =
         "You did it! Why don't you go back to the main lobby?";
@@ -188,7 +193,7 @@ export default class Science extends Phaser.Scene {
       // let count = document.getElementById("sciClueCount");
       // count.innerText = localCount;
 
-      checkName();
+      checkSName();
 
       return false;
     }

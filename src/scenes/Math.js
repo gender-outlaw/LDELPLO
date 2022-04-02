@@ -9,12 +9,11 @@ let rocket;
 let mathClueCount = 0;
 let nameGuessCount = 1;
 let mathClueList = document.getElementById("math-clues");
-let guessButton = document.getElementById("subname");
-let firstnameGuess = document.getElementById("firstnameguess");
-let lastnameGuess = document.getElementById("lastnameguess");
-let nameguess = document.getElementById("nameguess");
-function submitName() {
-  console.log("yo");
+let guessButton = document.getElementById("submname");
+let firstnameGuess = document.getElementById("firstnamemguess");
+let lastnameGuess = document.getElementById("lastnamemguess");
+let nameguess = document.getElementById("nameMguess");
+function submitMName() {
   const firstNameGuess = firstnameGuess.value.toUpperCase();
   const lastNameGuess = lastnameGuess.value.toUpperCase();
   if (
@@ -24,7 +23,7 @@ function submitName() {
     localStorage.setItem("math", "complete");
     nameGuessCount = 0;
     console.log("yoooo");
-    let nameguess = document.getElementById("nameguess");
+    let nameguess = document.getElementById("nameMguess");
     nameguess.classList.add("hidden");
     // let win = document.getElementById("299");
     let mathClues = document.getElementById("math-clues");
@@ -37,21 +36,21 @@ function submitName() {
     // let lose = document.getElementById("29");
     // lose.classList.toggle("hidden");
 
-    let nameguess = document.getElementById("nameguess");
+    let nameguess = document.getElementById("nameMguess");
     nameguess.classList.add("hidden");
     let mathScene = document.getElementById("mathscene");
     mathScene.innerHTML = "<b>Math Room</b>: Katherine Johnson";
   } else {
     nameGuessCount++;
-    firstnameGuess.value = "";
-    lastnameGuess.value = "";
   }
+  firstnameGuess.value = "";
+  lastnameGuess.value = "";
 }
 
 function checkName() {
   nameguess.classList.toggle("hidden");
   console.log("pleaseeee");
-  guessButton.addEventListener("click", submitName);
+  guessButton.addEventListener("click", submitMName);
 }
 export default class Math extends Phaser.Scene {
   constructor() {
