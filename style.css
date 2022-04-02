@@ -14,19 +14,22 @@ button {
   cursor: pointer;
 }
 
-#title h1 {
-  /* display: inline; */
-  padding: 10px;
+#title {
+  /* padding: 10px; */
+  /* flex: column; */
+  display: block;
+  align-items: center;
   text-align: center;
+  left: 25%;
   color: rgb(145, 214, 211);
-  font-size: 1em;
+  /* font-size: 2em;
   letter-spacing: 0.25em;
-  font-weight: 700;
+  font-weight: 700; */
 }
 
 @media screen and (max-width: 1279px) {
   * {
-    display: none;
+    display: "none";
   }
 }
 
@@ -76,7 +79,8 @@ canvas {
 
 canvas {
   flex-basis: 50%;
-  border: 2px solid rgb(255, 255, 255);
+  border-radius: 25px;
+  border: 3px solid rgb(255, 255, 255);
   /* border-radius: 10px;
   padding: 10px; */
 }
@@ -111,7 +115,8 @@ canvas {
   word-wrap: normal;
   font-size: 5;
 }
-#tech-clues {
+#tech-clues,
+.playerGuess {
   /* position: absolute; */
   bottom: 125px;
   left: 10px;
@@ -130,7 +135,7 @@ canvas {
   border: 2px solid black;
   height: 640px;
   width: 800px;
-  left: 23%;
+  left: 35%;
   top: 15%;
   background-color: rgb(145, 214, 211);
   border-radius: 30px;
@@ -151,9 +156,9 @@ canvas {
 #dialogue {
   color: white;
   overflow: hidden;
-  border-right: 0.15em solid yellow;
+  /* border-right: 0.15em solid yellow; */
   white-space: nowrap;
-  animation: typing 3s steps(20, end) forwards;
+  animation: typing 20s steps(20, end) forwards;
   font-size: 10;
   width: 800;
   background-color: black;
@@ -259,19 +264,6 @@ nav {
   left: 0%;
   top: 10%;
 }
-.playerGuess {
-  position: absolute;
-  left: 82%;
-  bottom: 10%;
-  width: 200px;
-  height: 400px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  background-color: rgb(245, 255, 63);
-  background-repeat: no-repeat;
-  font-size: 20px;
-}
 
 .form {
   position: absolute;
@@ -282,14 +274,23 @@ nav {
   margin-left: 25%;
   margin-top: auto;
 }
-#nameguess {
-  display: inline-block;
+#nameSguess,
+#nameTguess,
+#nameEguess,
+#nameMguess,
+#nameLguess {
+  /* display: inline-block; */
   margin-left: 0%;
   margin-top: auto;
   color: white;
 }
 
-#nameguess h3 {
+#nameSguess,
+#nameTguess,
+#nameEguess,
+#nameMguess,
+#nameLguess,
+h3 {
   color: white;
 }
 /* memory game styling */
