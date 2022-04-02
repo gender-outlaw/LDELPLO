@@ -14,9 +14,11 @@ button {
   cursor: pointer;
 }
 
-#title {
+#title,
+h1 {
   /* padding: 10px; */
   /* flex: column; */
+  width: 100%;
   display: block;
   align-items: center;
   text-align: center;
@@ -46,8 +48,8 @@ button {
   display: inline-block;
   width: 300px;
   padding: 5px;
-  border-radius: 10px;
-  border: 2px solid black;
+  border-radius: 25px;
+  border: 0.15em solid rgb(248, 235, 161);
 }
 
 body {
@@ -71,16 +73,19 @@ body,
 canvas {
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
   /* margin-left: 25%;
   margin-top: 0%; */
-  /* border: 2px solid white;
-  border-radius: 10px; */
+  /* border: 2px solid rgb(248, 235, 161); */
+  border-radius: 10px;
+  align-items: center;
+  position: static;
 }
 
 canvas {
   flex-basis: 50%;
   border-radius: 25px;
-  border: 3px solid rgb(255, 255, 255);
+  border: 0.15em solid rgb(248, 235, 161);
   /* border-radius: 10px;
   padding: 10px; */
 }
@@ -92,11 +97,11 @@ canvas {
   /* position: absolute; */
   bottom: 125px;
   left: 10px;
-  border: 2px solid black;
+  border-radius: 25px;
+  border: 0.15em solid rgb(248, 235, 161);
   height: 400px;
   width: 275px;
   background-color: rgb(145, 214, 211);
-  border-radius: 10px;
   padding: 10px;
   word-wrap: normal;
   font-size: 5;
@@ -106,59 +111,68 @@ canvas {
   /* position: absolute; */
   bottom: 125px;
   left: 10px;
-  border: 2px solid black;
+  border-radius: 25px;
+  border: 0.15em solid rgb(248, 235, 161);
   height: 400px;
   width: 275px;
   background-color: rgb(145, 214, 211);
-  border-radius: 10px;
   padding: 10px;
   word-wrap: normal;
   font-size: 5;
 }
-#tech-clues,
-.playerGuess {
+#tech-clues {
   /* position: absolute; */
   bottom: 125px;
   left: 10px;
-  border: 2px solid black;
+  border-radius: 25px;
+  border: 0.15em solid rgb(248, 235, 161);
   height: 400px;
   width: 275px;
   background-color: rgb(145, 214, 211);
-  border-radius: 10px;
   padding: 10px;
   word-wrap: normal;
   font-size: 12px;
+}
+#clue-list,
+#science-clues,
+#engineering-clues,
+#math-clues,
+#tech-clues,
+h3 {
+  color: black;
 }
 
 #rules {
   position: absolute;
   border: 2px solid black;
-  height: 640px;
-  width: 800px;
-  left: 35%;
-  top: 15%;
-  background-color: rgb(145, 214, 211);
+  height: 650px;
+  width: 100%;
+  left: 0%;
+  top: 17%;
+  background-image: linear-gradient(to bottom right, rgb(145, 214, 211), white);
   border-radius: 30px;
-  padding: 10px;
+  /* padding: 10px; */
   text-align: center;
 }
 #game {
+  /* display: flex; */
   border: 2px solid black;
   background-color: rgb(145, 214, 211);
   border-radius: 30px;
   padding: 10px;
   text-align: center;
-  margin-left: 25%;
   margin-top: auto;
-  width: 800px;
-  height: 650px;
+  width: 775px;
+  height: 640px;
 }
+
 #dialogue {
   color: white;
   overflow: hidden;
-  /* border-right: 0.15em solid yellow; */
+  border: 0.15em solid rgb(248, 235, 161);
+  border-radius: 25px;
   white-space: nowrap;
-  animation: typing 20s steps(20, end) forwards;
+  animation: typing 2s steps(10, end) forwards;
   font-size: 10;
   width: 800;
   background-color: black;
@@ -166,13 +180,26 @@ canvas {
   padding: 10px;
 }
 
+#inner {
+  color: rgb(248, 235, 161);
+  text-shadow: #fff;
+  size: 20;
+  animation: typing 2s steps(10, end) forwards;
+}
+
+/* #dialogue .innerText {
+  color: rgb(248, 235, 161);
+  text-shadow: #fff;
+  size: 20;
+} */
+
 .hidden {
   display: none;
 }
 
 @keyframes typing {
   from {
-    width: 0;
+    width: 25%;
   }
   to {
     width: 100%;
@@ -241,48 +268,86 @@ nav {
 }
 
 /* pridle */
-.pcontainer {
-  margin-left: 25%;
+#pridle {
+  border: 2px solid black;
+  background-color: rgba(69, 77, 76, 0);
+  border-radius: 30px;
+  padding: 10px;
+  text-align: center;
   margin-top: auto;
-  width: 800px;
-  height: 650px;
+  width: 775px;
+  height: 640px;
+}
+
+.pcontainer {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
-  background-size: 800x, 640px;
+  flex-direction: row;
+  border: 2px solid rgb(243, 235, 235);
+  background-color: rgba(73, 83, 83, 0);
+  text-align: center;
   background-repeat: no-repeat;
-  border-radius: 10px;
+  background-position: center;
+  /* margin-top: auto; */
+  width: 775px;
+  height: 640px;
 }
+
 .black {
-  width: 33.33333%;
-  height: 50%;
-  box-sizing: border-box;
+  flex: row;
+  width: calc(33.333%);
+  height: calc(50%);
+  /* position: relative; */
+  box-sizing: content-box;
   background-color: black;
-}
-.pheader {
-  position: absolute;
-  left: 0%;
-  top: 10%;
 }
 
 .form {
-  position: absolute;
+  /* position: absolute; */
   left: 82%;
   bottom: 5%;
+  width: 100%;
+  padding: 16px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f1f1f1;
+}
+#guessContainer {
+  /* position: absolute; */
+  bottom: 125px;
+  left: 10px;
+  border-radius: 25px;
+  border: 0.15em solid rgb(248, 235, 161);
+  height: 400px;
+  width: 275px;
+  background-color: rgb(248, 235, 161);
+  padding: 10px;
+  word-wrap: normal;
+  font-size: 20px;
+  color: black;
+  font-weight: 200;
 }
 .pheader {
-  margin-left: 25%;
+  position: absolute;
+  width: 800px;
   margin-top: auto;
+  text-align: center;
+  text-justify: right;
+}
+#lang {
+  height: 50px;
+  width: 500px;
+  font-size: 20px;
 }
 #nameSguess,
 #nameTguess,
 #nameEguess,
 #nameMguess,
 #nameLguess {
-  /* display: inline-block; */
   margin-left: 0%;
   margin-top: auto;
   color: white;
+  size: 400px;
 }
 
 #nameSguess,
@@ -291,34 +356,34 @@ nav {
 #nameMguess,
 #nameLguess,
 h3 {
+  width: 400px;
   color: white;
 }
+
 /* memory game styling */
 .container {
-  margin-left: 25%;
-  margin-top: auto;
-  width: 800px;
-  height: 650px;
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
-  padding: 5px;
-  perspective: 1000px;
+  flex-direction: column;
+  /* border-radius: 30px; */
+  padding: 10px;
+  text-align: center;
+  margin-top: auto;
+  width: 775px;
+  height: 640px;
   background-color: lightpink;
   border: 2px solid hotpink;
 }
 
 .card {
+  box-sizing: content-box;
+  /* flex: row; */
   width: calc(25% - 10px);
   height: calc(33.333% - 10px);
   position: relative;
   transform: scale(1);
   transform-style: preserve-3d;
   transition: transform 0.5s;
-  background-color: lightpink;
-  border: 2px solid hotpink;
 }
 
 .card:active {
@@ -334,8 +399,8 @@ h3 {
 .back {
   width: 100%;
   height: 100%;
-  /* padding: 10px; */
-  position: absolute;
+  padding: 10px;
+  position: relative;
   border-radius: 5px;
   backface-visibility: hidden;
 }

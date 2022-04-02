@@ -182,7 +182,7 @@ export default class Science extends Phaser.Scene {
     }
     let localCount = localStorage.getItem("scount");
     if (localCount === "4") {
-      let dialogue = document.getElementById("dialogue");
+      let dialogue = document.getElementById("inner");
       dialogue.innerText =
         "You did it! Why don't you go back to the main lobby?";
       // clue3.classList.toggle("hidden");
