@@ -4,41 +4,46 @@ import Pridle from "./Pridle";
 let tItem;
 let techDoor;
 let tClueCount = 0;
-let nameGuessCount = 1;
 let techClues = document.getElementById("tech-clues");
-let guessButton = document.getElementById("subname");
-let nameguess = document.getElementById("nameguess");
-let techguess = document.getElementById("techguess");
+let nameGuessTCount = 1;
+let guessButton = document.getElementById("subtname");
+let firstnameTGuess = document.getElementById("firstnametguess");
+let lastnameTGuess = document.getElementById("lastnametguess");
+let nameguess = document.getElementById("nameTguess");
 
-function submitName() {
-  console.log(nameguess.value);
-  const guess = nameguess.value.toUpperCase();
-  let techClues = document.getElementById("tech-clues");
-  if (guess === "LYNN CONWAY" || guess === "CONWAY") {
+function submitTName() {
+  const firstNameGuess = firstnameTGuess.value.toUpperCase();
+  const lastNameGuess = lastnameTGuess.value.toUpperCase();
+  if (
+    (firstNameGuess === "LYNN" && lastNameGuess === "CONWAY") ||
+    (firstNameGuess === "" && lastNameGuess === "CONWAY")
+  ) {
+    nameguess.classList.toggle("hidden");
     localStorage.setItem("tech", "complete");
-    nameGuessCount = 0;
+    nameGuessTCount = 0;
     let win = document.getElementById("299");
     let techClues = document.getElementById("tech-clues");
     techClues.classList.add("hidden");
     win.classList.toggle("hidden");
-    techguess.classList.add("hidden");
+    nameguess.classList.add("hidden");
     let techScene = document.getElementById("techscene");
     techScene.innerHTML = "<b>Technology Room</b>: Lynn Conway";
-  } else if (nameGuessCount === 3) {
+  } else if (nameGuessTCount === 3) {
+    nameguess.classList.toggle("hidden");
     localStorage.setItem("tech", "complete");
     let lose = document.getElementById("29");
     lose.classList.toggle("hidden");
-    techguess.classList.add("hidden");
     let techScene = document.getElementById("techscene");
     techScene.innerHTML = "<b>Technology Room</b>: Lynn Conway";
   } else {
-    nameGuessCount++;
-    nameguess.value = "";
+    nameGuessTCount++;
   }
+  firstnameTGuess.value = "";
+  lastnameTGuess.value = "";
 }
 function checkName() {
-  techguess.classList.remove("hidden");
-  guessButton.addEventListener("click", submitName);
+  nameguess.classList.toggle("hidden");
+  guessButton.addEventListener("click", submitTName);
 }
 export default class Technology extends Phaser.Scene {
   constructor() {
@@ -103,7 +108,7 @@ export default class Technology extends Phaser.Scene {
     lobbyClues.classList.add("hidden");
     console.log("hi", this.cache.tilemap.get("techMap").data);
     //this.add.image(275, 275, "Floor");
-    const nameGuess = document.getElementById("nameguess");
+    const nameGuess = document.getElementById("nameTguess");
 
     const map = this.make.tilemap({
       key: "techMap",
@@ -207,15 +212,14 @@ export default class Technology extends Phaser.Scene {
       clue28.classList.remove("hidden");
     }
     let localCount = localStorage.getItem("tcount");
-    if (tClueCount === 4) {
-      console.log(localCount === "4");
+    if (localCount === 4) {
       let dialogue = document.getElementById("dialogue");
       dialogue.innerText =
         "Great job! Why don't we head back to the main lobby?";
       checkName();
-    }
 
-    return false;
+      return false;
+    }
   }
   setItem(item) {
     localStorage.setItem(item, "collected");
