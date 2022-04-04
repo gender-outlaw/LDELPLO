@@ -94,8 +94,8 @@ export default class Memory extends Phaser.Scene {
       memoryGame.classList.toggle("hidden");
       canvas.classList.remove("hidden");
       sciClues.classList.toggle("hidden");
-      // let sciBlock = document.getElementById("science-clues");
-      // sciBlock.classList.add("hidden");
+      let sciBlock = document.getElementById("science-clues");
+      sciBlock.classList.add("hidden");
     }
   }
   update() {}

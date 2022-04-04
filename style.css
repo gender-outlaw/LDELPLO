@@ -133,12 +133,11 @@ canvas {
   word-wrap: normal;
   font-size: 12px;
 }
-#clue-list,
-#science-clues,
-#engineering-clues,
-#math-clues,
-#tech-clues,
-h3 {
+#clue-list h3,
+#science-clues h3,
+#engineering-clues h3,
+#math-clues h3,
+#tech-clues h3 {
   color: black;
 }
 
