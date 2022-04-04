@@ -1,15 +1,54 @@
-import Phaser from 'phaser';
-import Player from '../entities/Player';
-import Memory from '../scenes/Memory';
-
+import Phaser from "phaser";
+import Player from "../entities/Player";
+import Memory from "../scenes/Memory";
 
 let item;
 let sciDoor;
-let sText;
 let scienceClues = document.getElementById("science-clues");
 let sciClueCount = 0;
-let sciScene = document.getElementById("sciscene");
+let nameGuessCount = 1;
+let guessButton = document.getElementById("subsname");
+let firstnameSGuess = document.getElementById("firstnamesguess");
+let lastnameSGuess = document.getElementById("lastnamesguess");
+let nameguess = document.getElementById("nameSguess");
+function submitSName() {
+  const firstNameGuess = firstnameSGuess.value.toUpperCase();
+  const lastNameGuess = lastnameSGuess.value.toUpperCase();
+  if (
+    (firstNameGuess === "ROSALIND" && lastNameGuess === "FRANKLIN") ||
+    (firstNameGuess === "" && lastNameGuess === "FRANKLIN")
+  ) {
+    localStorage.setItem("sci", "complete");
+    nameGuessCount = 1;
+    console.log("yoooo");
+    let nameguess = document.getElementById("nameSguess");
+    nameguess.classList.add("hidden");
+    // let sciClues = document.getElementById("science-clues");
+    scienceClues.classList.toggle("hidden");
+    let sciScene = document.getElementById("sciscene");
+    sciScene.innerHTML = "<b>Science Room</b>: Rosalind Franklin";
+    let sciBlock = document.getElementById("science-clues");
+    sciBlock.classList.add("hidden");
+  } else if (nameGuessCount === 3) {
+    localStorage.setItem("sci", "complete");
+    let sciBlock = document.getElementById("science-clues");
+    sciBlock.classList.add("hidden");
+    let nameguess = document.getElementById("nameSguess");
+    nameguess.classList.add("hidden");
+    let sciScene = document.getElementById("sciscene");
+    sciScene.innerHTML = "<b>Science Room</b>: Rosalind Franklin";
+  } else {
+    nameGuessCount++;
+  }
+  firstnameSGuess.value = "";
+  lastnameSGuess.value = "";
+}
 
+function checkSName() {
+  nameguess.classList.toggle("hidden");
+  console.log("pleaseeee");
+  guessButton.addEventListener("click", submitSName);
+}
 export default class Science extends Phaser.Scene {
   constructor() {
     super("Science");
@@ -26,14 +65,14 @@ export default class Science extends Phaser.Scene {
       "../public/assets/tilesets/shop-and-hospital.png"
     );
 
-    this.load.image('lobby', '../public/assets/tilesets/LobbyTiles.png');
-    this.load.image('chemical', '../public/assets/images/chemical.png');
-    this.load.image('coal', '../public/assets/images/coal.png');
-    this.load.image('research', '../public/assets/images/research.png');
-    this.load.image('dna', '../public/assets/images/dna.png');
-    this.load.image('sciDoor', '../public/assets/images/sciDoor.png');
+    this.load.image("lobby", "../public/assets/tilesets/LobbyTiles.png");
+    this.load.image("chemical", "../public/assets/images/chemical.png");
+    this.load.image("coal", "../public/assets/images/coal.png");
+    this.load.image("research", "../public/assets/images/research.png");
+    this.load.image("dna", "../public/assets/images/dna.png");
+    this.load.image("sciDoor", "../public/assets/images/sciDoor.png");
 
-    this.load.spritesheet('rosalind', '../public/assets/sprites/rosalind.png', {
+    this.load.spritesheet("rosalind", "../public/assets/sprites/rosalind.png", {
       frameWidth: 32,
       frameHeight: 32,
     });
@@ -42,12 +81,13 @@ export default class Science extends Phaser.Scene {
   create() {
     console.log(this.cache.tilemap.get("sciMap").data);
 
-    if (localStorage.getItem('science') === 'complete') {
+    if (localStorage.getItem("science") === "complete") {
       scienceClues.classList.toggle("hidden");
     } else {
-      scienceClues.classList.remove("hidden")
+      scienceClues.classList.remove("hidden");
     }
-
+    let lobbyClues = document.getElementById("clue-list");
+    lobbyClues.classList.add("hidden");
     const map = this.make.tilemap({
       key: "sciMap",
       tileWidth: 32,
@@ -100,12 +140,6 @@ export default class Science extends Phaser.Scene {
     this.physics.add.collider(this.player, furnitureLayer);
     this.physics.add.collider(this.player, wallLayer);
     this.physics.add.collider(this.player, objectLayer);
-
-    sText = this.add.text(500, 70, `Clues List`, {
-      fontSize: '20px',
-      fill: 'white',
-    });
-    sText.setScrollFactor(0);
   }
 
   update() {
@@ -113,59 +147,63 @@ export default class Science extends Phaser.Scene {
   }
 
   collect(player, object) {
-    if (localStorage.getItem(object.texture.key)) { // need to work on this
-      console.log('You already found that clue!');
+    if (localStorage.getItem(object.texture.key)) {
+      // need to work on this
+      console.log("You already found that clue!");
       return false;
     }
 
     sciClueCount += 1;
+    localStorage.setItem("scount", sciClueCount);
     object.destroy(object.x, object.y);
     // text.setText(`Clues: y`); // set the text to show the current score
-    let clue3 = document.getElementById('3');
-    let clue4 = document.getElementById('4');
-    let clue5 = document.getElementById('5');
-    let clue6 = document.getElementById('6');
-    let clue101 = document.getElementById('101')
+    let clue3 = document.getElementById("3");
+    let clue4 = document.getElementById("4");
+    let clue5 = document.getElementById("5");
+    let clue6 = document.getElementById("6");
+    let clue101 = document.getElementById("101");
 
-    let count = document.getElementById('sciClueCount');
+    let count = document.getElementById("sciClueCount");
     count.innerText = sciClueCount;
     let objName = object.texture.key;
 
-    if (objName === 'chemical') {
-      this.setItem(objName, 'collected')
-      clue3.classList.remove('hidden');
-    } else if (objName === 'dna') {
-      this.setItem(objName, 'collected')
-      clue4.classList.remove('hidden');
-    } else if (objName === 'research') {
-      this.setItem(objName, 'collected')
-      clue5.classList.remove('hidden');
-    } else if (objName === 'coal') {
-      this.setItem(objName, 'collected')
-      clue6.classList.remove('hidden');
+    if (objName === "chemical") {
+      this.setItem(objName, "collected");
+      clue3.classList.remove("hidden");
+    } else if (objName === "dna") {
+      this.setItem(objName, "collected");
+      clue4.classList.remove("hidden");
+    } else if (objName === "research") {
+      this.setItem(objName, "collected");
+      clue5.classList.remove("hidden");
+    } else if (objName === "coal") {
+      this.setItem(objName, "collected");
+      clue6.classList.remove("hidden");
     }
+    let localCount = localStorage.getItem("scount");
+    if (localCount === "4") {
+      let dialogue = document.getElementById("inner");
+      dialogue.innerText =
+        "You did it! Why don't you go back to the main lobby?";
+      // clue3.classList.toggle("hidden");
+      // clue4.classList.toggle("hidden");
+      // clue5.classList.toggle("hidden");
+      // clue6.classList.toggle("hidden");
+      // clue101.classList.remove("hidden");
+      // let count = document.getElementById("sciClueCount");
+      // count.innerText = localCount;
 
-    if (sciClueCount === 4) {
-      localStorage.setItem('science', 'complete');
-      let dialogue = document.getElementById('dialogue');
-      dialogue.innerText = 'You did it!';
-      setTimeout(() => {
-        clue3.classList.toggle("hidden")
-        clue4.classList.toggle("hidden")
-        clue5.classList.toggle("hidden")
-        clue6.classList.toggle("hidden")
-        clue101.classList.remove("hidden")
-        sciScene.innerHTML = '<b>Science Room</b>: Rosalind Franklin';
-      }, 3000);
+      checkSName();
+
+      return false;
     }
-    return false;
   }
 
   setItem(item) {
     localStorage.setItem(item, "collected");
   }
 
-  getItem(item){
+  getItem(item) {
     if (localStorage.getItem(item)) {
       return true;
     } else {
@@ -174,8 +212,17 @@ export default class Science extends Phaser.Scene {
   }
 
   exit() {
-    this.scene.stop('Science');
-    this.scene.start('Memory');
+    let sciClues = document.getElementById("science-clues");
+    this.scene.stop("Science");
+    const num = localStorage.getItem("scount");
+    if (num === "4") {
+      this.scene.start("Memory");
+    } else {
+      sciClues.classList.add("hidden");
+      let lobbyClues = document.getElementById("clue-list");
+      lobbyClues.classList.toggle("hidden");
+      this.scene.start("Lobby");
+    }
   }
 
   createAnimations() {

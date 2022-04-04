@@ -7,10 +7,51 @@ let eObject;
 let EngineeringClues;
 let Door;
 let backToLobbyDoor;
-let clueCount = 0;
-let engScene = document.getElementById("engscene");
+let eClueCount = 0;
 let engineeringClues = document.getElementById("engineering-clues");
+let nameGuessCount = 1;
+let guessButton = document.getElementById("subename");
+let firstnameEGuess = document.getElementById("firstenameguess");
+let lastnameEGuess = document.getElementById("lastenameguess");
+let nameguess = document.getElementById("nameEguess");
+function submitEName() {
+  const firstNameGuess = firstnameEGuess.value.toUpperCase();
+  const lastNameGuess = lastnameEGuess.value.toUpperCase();
+  if (
+    (firstNameGuess === "MARY" && lastNameGuess === "ROSS") ||
+    (firstNameGuess === "" && lastNameGuess === "ROSS")
+  ) {
+    localStorage.setItem("eng", "complete");
+    nameGuessCount = 1;
+    console.log("yoooo");
+    let nameguess = document.getElementById("nameEguess");
+    nameguess.classList.add("hidden");
+    let engClues = document.getElementById("engineering-clues");
+    engClues.classList.add("hidden");
+    let engScene = document.getElementById("engscene");
+    engScene.innerHTML = "<b>Engineering Room</b>: Mary Golda Ross";
+    let engBlock = document.getElementById("engineering-clues");
+    engBlock.classList.add("hidden");
+  } else if (nameGuessCount === 3) {
+    localStorage.setItem("math", "complete");
+    let engBlock = document.getElementById("engineering-clues");
+    engBlock.classList.add("hidden");
+    let nameguess = document.getElementById("nameEguess");
+    nameguess.classList.add("hidden");
+    let engScene = document.getElementById("engscene");
+    engScene.innerHTML = "<b>Engineering Room</b>: Mary Golda Ross";
+  } else {
+    nameGuessCount++;
+  }
+  firstnameEGuess.value = "";
+  lastnameEGuess.value = "";
+}
 
+function checkEName() {
+  nameguess.classList.toggle("hidden");
+  console.log("pleaseeee");
+  guessButton.addEventListener("click", submitEName);
+}
 export default class Engineering extends Phaser.Scene {
   constructor() {
     super("Engineering");
@@ -53,17 +94,15 @@ export default class Engineering extends Phaser.Scene {
   }
 
   create() {
-
-    if (localStorage.getItem('eng') === 'complete') {
+    if (localStorage.getItem("eng") === "complete") {
       engineeringClues.classList.toggle("hidden");
     } else {
-      engineeringClues.classList.remove("hidden")
+      engineeringClues.classList.remove("hidden");
     }
-
-
+    let lobbyClues = document.getElementById("clue-list");
+    lobbyClues.classList.add("hidden");
     this.add.image(0, 0, "engineeringFloor");
-    
-        
+
     // engineeringClues.classList.remove("hidden")
 
     const map = this.make.tilemap({
@@ -149,7 +188,6 @@ export default class Engineering extends Phaser.Scene {
     this.physics.add.collider(this.player, furnitureLayer);
     this.physics.add.collider(this.player, chalkboardLayer);
     this.physics.add.collider(this.player, plantsAndDecorLayer);
-
   }
 
   update() {
@@ -157,19 +195,28 @@ export default class Engineering extends Phaser.Scene {
   }
 
   exitRoom() {
-
+    let engClues = document.getElementById("engineering-clues");
     this.scene.stop("Engineering");
-    this.scene.start("Scrammble");
+    const num = localStorage.getItem("ecount");
+    if (num === "5") {
+      this.scene.start("Scrammble");
+    } else {
+      engClues.classList.add("hidden");
+      let lobbyClues = document.getElementById("clue-list");
+      lobbyClues.classList.toggle("hidden");
+      this.scene.start("Lobby");
+    }
     // engineeringClues.classList.toggle("hidden")
-    
   }
 
   eCollect(player, object) {
-    if (localStorage.getItem(object.texture.key)) { // need to work on this
-      console.log('You already found that clue!');
+    if (localStorage.getItem(object.texture.key)) {
+      // need to work on this
+      console.log("You already found that clue!");
       return false;
     }
-    clueCount += 1;
+    eClueCount += 1;
+    localStorage.setItem("ecount", eClueCount);
     object.destroy(object.x, object.y);
     let clue7 = document.getElementById("7");
     let clue8 = document.getElementById("8");
@@ -178,62 +225,56 @@ export default class Engineering extends Phaser.Scene {
     let clue11 = document.getElementById("11");
     let clue100 = document.getElementById("100");
 
-
     let count = document.getElementById("eClueCount");
-    count.innerText = clueCount;
+    count.innerText = eClueCount;
     let objName = object.texture.key;
 
-
     if (objName === "planet") {
-      this.setItem(objName, 'collected')
+      this.setItem(objName, "collected");
       clue11.classList.remove("hidden");
     } else if (objName === "coin") {
-      this.setItem(objName, 'collected')
+      this.setItem(objName, "collected");
       clue8.classList.remove("hidden");
     } else if (objName === "skunk") {
-      this.setItem(objName, 'collected')
+      this.setItem(objName, "collected");
       clue9.classList.remove("hidden");
     } else if (objName === "flag") {
-      this.setItem(objName, 'collected')
+      this.setItem(objName, "collected");
       clue7.classList.remove("hidden");
     } else if (objName === "lock") {
-      this.setItem(objName, 'collected')
+      this.setItem(objName, "collected");
       clue10.classList.remove("hidden");
     }
-
-    if (clueCount === 5){
-      localStorage.setItem('eng', 'complete');
-      let dialogue = document.getElementById("dialogue");
-      dialogue.innerText = "You did it!"
-      setTimeout(() => {
-        clue7.classList.toggle("hidden")
-        clue8.classList.toggle("hidden")
-        clue9.classList.toggle("hidden")
-        clue10.classList.toggle("hidden")
-        clue11.classList.toggle("hidden")
-        clue100.classList.remove("hidden")
-        engScene.innerHTML = '<b>Engineering Room</b>: Mary Golda Ross';
-      }, 3000);
-      
-      
-
+    let localCount = localStorage.getItem("ecount");
+    if (localCount === "5") {
+      localStorage.setItem("eng", "complete");
+      let dialogue = document.getElementById("inner");
+      dialogue.innerText = "You did it!";
+      // setTimeout(() => {
+      //   clue7.classList.toggle("hidden");
+      //   clue8.classList.toggle("hidden");
+      //   clue9.classList.toggle("hidden");
+      //   clue10.classList.toggle("hidden");
+      //   clue11.classList.toggle("hidden");
+      //   clue100.classList.remove("hidden");
+      //   engScene.innerHTML = "<b>Engineering Room</b>: Mary Golda Ross";
+      // }, 3000);
+      checkEName();
+      return false;
     }
-
-    return false;
   }
 
   setItem(item) {
     localStorage.setItem(item, "collected");
   }
 
-  getItem(item){
+  getItem(item) {
     if (localStorage.getItem(item)) {
       return true;
     } else {
       return false;
     }
   }
-
 
   createAnimations() {
     this.player.anims.create({
