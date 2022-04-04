@@ -23,8 +23,8 @@ function submitSName() {
     console.log("yoooo");
     let nameguess = document.getElementById("nameSguess");
     nameguess.classList.add("hidden");
-    let sciClues = document.getElementById("science-clues");
-    sciClues.classList.add("hidden");
+    // let sciClues = document.getElementById("science-clues");
+    scienceClues.classList.toggle("hidden");
     let sciScene = document.getElementById("sciscene");
     sciScene.innerHTML = "<b>Science Room</b>: Rosalind Franklin";
     let sciBlock = document.getElementById("science-clues");
